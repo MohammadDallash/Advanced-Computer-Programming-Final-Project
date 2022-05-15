@@ -1,40 +1,51 @@
 package Dallash;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public final class ExcelRead {
-    private  ExcelRead() {};
+    private  ExcelRead() {}
 
 
-    static public HSSFWorkbook get_Workbook(String string) throws IOException
+    static public XSSFWorkbook get_Workbook(String string) throws IOException
     {
         FileInputStream myFile = new FileInputStream(string);
-        return  new HSSFWorkbook(myFile);
+        return  new XSSFWorkbook(myFile);
     }
 
-    static public HSSFCell read_Cell(int Row, int Cell, int sheet, HSSFWorkbook workbook)
+    static public XSSFCell read_Cell(int Row, int Cell, int sheet, XSSFWorkbook workbook)
     {
         return (workbook.getSheetAt(sheet).getRow(Row).getCell(Cell));
     }
 
-    static public HSSFCell read_Cell(int Row, int Cell,  HSSFWorkbook workbook)
+    static public XSSFCell read_Cell(int Row, int Cell,  XSSFWorkbook workbook)
     {
         return (workbook.getSheetAt(0).getRow(Row).getCell(Cell));
     }
 
-    static public HSSFRow read_Row(HSSFCell cell)
+    static public XSSFRow read_Row(XSSFCell cell)
     {
         return  cell.getRow();
     }
 
-    static public HSSFCell read_Row(HSSFRow row)
+
+   /* static public String Cell_toString(XSSFCell cell)
     {
-        return  row.getCell();
-    }
+        switch (cell.getCellType()) {
+            case STRING:
+                System.out.print(cell.getStringCellValue());
+                break;
+            case BOOLEAN:
+                System.out.print(cell.getBooleanCellValue());
+                break;
+            case NUMERIC:
+                System.out.print(cell.getNumericCellValue());
+                break;
+        }*/
 
 
 
