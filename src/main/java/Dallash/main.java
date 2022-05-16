@@ -10,7 +10,7 @@ public class main {
 
 
 
-    static int i = 0;
+    static int i = -1;
     static XSSFWorkbook wb = null;
     static JSONObject mainJSONObject = new JSONObject();
 
@@ -27,46 +27,34 @@ public class main {
 
 
 
-        recursion("", mainJSONObject);
-        System.out.println(mainJSONObject);
+        recursion( mainJSONObject);
+        System.out.print(mainJSONObject);
 
     }
 
 
-    public static void recursion(String lookFor, JSONObject JSONobject)
+    public static void recursion(JSONObject JSONobject)
     {
+        i++;
         if (i==21)  return;
+
         String Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
         String type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
         String [] array =Cureent_cell.split("/");
         String  last_value = array[array.length - 1];
 
-
-
-
         if (type.equals("string"))
         {
-            JSONobject.put(last_value, type);
-            i++;
-            recursion(lookFor, JSONobject);
+            if(array.length > 2) JSONobject.put(last_value, "string");
+            if (array.length == 2) mainJSONObject.put(last_value, "string");
+            recursion(JSONobject);
         }
         else
         {
-            if(array.length > 2)
-            {
-                JSONObject inner = new JSONObject();
-                i++;
-                recursion(type, inner);
-                JSONobject.put(type, inner);
-            }
-            else if (array.length == 2)
-            {
-                JSONObject inner = new JSONObject();
-                i++;
-                recursion(type, inner);
-                mainJSONObject.put(type, inner);
-
-            }
+            JSONObject inner = new JSONObject();
+            recursion(inner);
+            if(array.length > 2) JSONobject.put(type, inner);
+            if (array.length == 2)mainJSONObject.put(type, inner);
         }
 
 
