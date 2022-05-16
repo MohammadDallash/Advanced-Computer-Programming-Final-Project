@@ -10,9 +10,7 @@ import java.util.Stack;
 public class main {
 
 
-    static String Cureent_cell;
-    static String type;
-    static String last_value;
+
     static int i = 0;
     static XSSFWorkbook wb = null;
 
@@ -30,8 +28,6 @@ public class main {
 
 
         JSONObject mainJSONObject = new JSONObject();
-
-
         recursion("object1", mainJSONObject);
         System.out.println(mainJSONObject);
 
@@ -40,18 +36,19 @@ public class main {
 
     public static void recursion(String lookFor, JSONObject JSONobject)
     {
-        Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
-        type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
+        String Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
+        String type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
         String [] array =Cureent_cell.split("/");
-        last_value = array[array.length - 1];
-        if (array.length <= 2 )  return;
+        String  last_value = array[array.length - 1];
+
+
+        if (array.length <= 2 && i!=0)  return;
 
         if (type.equals("string"))
         {
-            JSONobject.put(type, last_value);
+            JSONobject.put(last_value, type);
             i++;
             recursion(lookFor, JSONobject);
-
         }
         else
         {
