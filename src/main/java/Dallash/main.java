@@ -3,9 +3,8 @@ package Dallash;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONObject;
-
 import java.io.IOException;
-import java.util.Stack;
+
 
 public class main {
 
@@ -13,7 +12,7 @@ public class main {
 
     static int i = 0;
     static XSSFWorkbook wb = null;
-
+    static JSONObject mainJSONObject = new JSONObject();
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -27,8 +26,8 @@ public class main {
 
 
 
-        JSONObject mainJSONObject = new JSONObject();
-        recursion("object1", mainJSONObject);
+
+        recursion("", mainJSONObject);
         System.out.println(mainJSONObject);
 
     }
@@ -36,13 +35,14 @@ public class main {
 
     public static void recursion(String lookFor, JSONObject JSONobject)
     {
+        if (i==21)  return;
         String Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
         String type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
         String [] array =Cureent_cell.split("/");
         String  last_value = array[array.length - 1];
 
 
-        if (array.length <= 2 && i!=0)  return;
+
 
         if (type.equals("string"))
         {
@@ -52,10 +52,21 @@ public class main {
         }
         else
         {
-            JSONObject inner = new JSONObject();
-            i++;
-            recursion(type, inner);
-            JSONobject.put(type, inner);
+            if(array.length > 2)
+            {
+                JSONObject inner = new JSONObject();
+                i++;
+                recursion(type, inner);
+                JSONobject.put(type, inner);
+            }
+            else if (array.length == 2)
+            {
+                JSONObject inner = new JSONObject();
+                i++;
+                recursion(type, inner);
+                mainJSONObject.put(type, inner);
+
+            }
         }
 
 
