@@ -2,10 +2,9 @@ package Dallash;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class main {
@@ -19,17 +18,41 @@ public class main {
             System.out.println("err reading the file\n");
             return;
         }
-        String data;
-        Stack<String> stack = new Stack<>();
-        for (int i= 0; i <3; i++)
+        String Cureent_cell;
+        String type;
+        String last_value;
+        Stack<JSONObject> stack = new Stack<>();
+        JSONObject mainJSONObject = new JSONObject();
+
+        JSONObject JsonObj;
+
+
+
+        for (int i= 0; i <4; i++)
         {
-            data = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
-            String [] array =data.split("/");
-            stack.push(  array[array.length-1]  );
+            Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
+            type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
+            String [] array =Cureent_cell.split("/");
+            last_value = array[array.length - 1];
+
+
+
+            if ( type.equals("string") )
+            {
+                stack.peek().put(last_value , "string");
+            }
+            else
+            {
+                JSONObject JSONobject = new JSONObject();
+                stack.push(JSONobject);
+            }
+
         }
 
-        System.out.println(stack);
 
+
+        mainJSONObject.put("object1" , stack.pop());
+        System.out.println(mainJSONObject);
 
     }
 
