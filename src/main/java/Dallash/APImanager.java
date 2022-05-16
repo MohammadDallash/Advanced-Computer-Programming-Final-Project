@@ -31,10 +31,10 @@ public class APImanager {
     {
         String Current_cell;
 
-        //for (this.iterator = 0; iterator < this.EOF; this.iterator++)
+        for (this.iterator = 0; iterator < this.EOF; this.iterator++)
         {
             Current_cell = ExcelRead.read_Cell(iterator, 0, 0, wb);
-            //if (true)
+            if (Current_cell.endsWith(("API_NAME")));
             {
                 String APIname = Current_cell.replace("(API_NAME)","");
                 JSONObject APIvalue = new JSONObject();
@@ -58,7 +58,7 @@ public class APImanager {
             }
         }
 
-
+        return this.APIs;
 
     }
 
