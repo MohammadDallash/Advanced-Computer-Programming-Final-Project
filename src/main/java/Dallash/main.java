@@ -50,11 +50,11 @@ public class main {
 
         if (type.equals("string"))
         {
-            if(array.length > 2) JSONobject.put(last_value, "string");
+            if(array.length > 2) JSONobject.put(last_value, get_information(i));
             if (array.length == 2)
             {
-                if(isRequest(i)) requestJSONObject.put(last_value, "string");
-                else responseJSONObject.put(last_value, "string");
+                if(isRequest(i)) requestJSONObject.put(last_value, get_information(i));
+                else responseJSONObject.put(last_value, get_information(i));
             }
             recursion(JSONobject,i);
         }
@@ -62,11 +62,11 @@ public class main {
         {
             JSONObject inner = new JSONObject();
             recursion(inner,i);
-            if(array.length > 2) JSONobject.put(type, inner);
+            if(array.length > 2) JSONobject.put(last_value, inner);
             if (array.length == 2)
             {
-                if(isRequest(i)) requestJSONObject.put(type, inner);
-                else responseJSONObject.put(type, inner);
+                if(isRequest(i)) requestJSONObject.put(last_value, inner);
+                else responseJSONObject.put(last_value, inner);
             }
         }
 
@@ -81,6 +81,18 @@ public class main {
         if (Cureent_cell.equals("I")) return true;
         if (Cureent_cell.equals("O")) return false;
         else return false;
+    }
+
+
+
+    public static JSONObject get_information(int x)
+    {
+        JSONObject myJson = new JSONObject();
+        myJson.put("Type", ExcelRead.read_Cell(x, 2, 0, wb).getStringCellValue());
+        myJson.put("Allowed Values", ExcelRead.read_Cell(x, 3, 0, wb).getStringCellValue());
+        myJson.put("Mandatory", ExcelRead.read_Cell(x, 4, 0, wb).getStringCellValue());
+
+        return myJson;
     }
 
 
