@@ -48,9 +48,10 @@ public class main {
 
         if (type.equals("string"))
         {
-            JSONobject.put(lookFor, last_value);
+            JSONobject.put(type, last_value);
             i++;
             recursion(lookFor, JSONobject);
+
         }
         else
         {
