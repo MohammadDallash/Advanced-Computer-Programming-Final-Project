@@ -17,9 +17,9 @@ public final class ExcelRead {
         return  new XSSFWorkbook(myFile);
     }
 
-    static public XSSFCell read_Cell(int Row, int Cell, int sheet, XSSFWorkbook workbook)
+    static public String read_Cell(int Row, int Cell, int sheet, XSSFWorkbook workbook)
     {
-        return (workbook.getSheetAt(sheet).getRow(Row).getCell(Cell));
+        return (workbook.getSheetAt(sheet).getRow(Row).getCell(Cell)).getStringCellValue();
     }
 
     static public XSSFCell read_Cell(int Row, int Cell,  XSSFWorkbook workbook)

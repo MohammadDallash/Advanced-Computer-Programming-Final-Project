@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class main {
 
-    static XSSFWorkbook wb = null;
+    /*static XSSFWorkbook wb = null;
     static JSONObject requestJSONObject = new JSONObject();
     static JSONObject responseJSONObject= new JSONObject();
-    static JSONObject APIJSONObject = new JSONObject();
+    static JSONObject MyAPIs = new JSONObject();*/
 
 
 
@@ -20,8 +20,9 @@ public class main {
 
 
 
-    public static void main(String[] args) {
-        BasicConfigurator.configure();
+    public static void main(String[] args)
+    {/*
+
 
         try {
             wb = ExcelRead.get_Workbook("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\Excels\\basic.xlsx");
@@ -32,19 +33,28 @@ public class main {
 
         recursion(null, -1);
 
-        APIJSONObject.put("request",requestJSONObject);
-        APIJSONObject.put("response",responseJSONObject);
-        System.out.println(APIJSONObject);
+
+        System.out.println(MyAPIs);*/
+        BasicConfigurator.configure();
+        APImanager myManager =  new APImanager("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\Excels\\basic.xlsx", 26);
+        System.out.println(myManager.get_api());
+
+
     }
 
 
-    public static void recursion(JSONObject JSONobject, int i)
+    /*public static void recursion(JSONObject JSONobject, int i)
     {
         i++;
-        if (i==21)  return;
+        if (i==21)
+        {
+            MyAPIs.put("request",requestJSONObject);
+            MyAPIs.put("response",responseJSONObject);
+            return;
+        }
 
-        String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
-        String type = ExcelRead.read_Cell(i, 2, 0, wb).getStringCellValue();
+        String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb);
+        String type = ExcelRead.read_Cell(i, 2, 0, wb);
         String[] array =Cureent_cell.split("/");
         String last_value = array[array.length - 1];
 
@@ -77,7 +87,7 @@ public class main {
 
     public static boolean isRequest(int x)
     {
-        String Cureent_cell = ExcelRead.read_Cell(x, 0, 0, wb).getStringCellValue();
+        String Cureent_cell = ExcelRead.read_Cell(x, 0, 0, wb);
         if (Cureent_cell.equals("I")) return true;
         if (Cureent_cell.equals("O")) return false;
         else return false;
@@ -88,13 +98,13 @@ public class main {
     public static JSONObject get_information(int x)
     {
         JSONObject myJson = new JSONObject();
-        myJson.put("Type", ExcelRead.read_Cell(x, 2, 0, wb).getStringCellValue());
-        myJson.put("Allowed Values", ExcelRead.read_Cell(x, 3, 0, wb).getStringCellValue());
-        myJson.put("Mandatory", ExcelRead.read_Cell(x, 4, 0, wb).getStringCellValue());
+        myJson.put("Type", ExcelRead.read_Cell(x, 2, 0, wb));
+        myJson.put("Allowed Values", ExcelRead.read_Cell(x, 3, 0, wb));
+        myJson.put("Mandatory", ExcelRead.read_Cell(x, 4, 0, wb));
 
         return myJson;
     }
-
+*/
 
 
 
