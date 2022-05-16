@@ -33,7 +33,7 @@ public class APImanager {
 
         for (this.iterator = 0; iterator < this.EOF; this.iterator++)
         {
-            Current_cell = ExcelRead.read_Cell(iterator, 0, 0, wb);
+            Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
             if (Current_cell.endsWith(("API_NAME")));
             {
                 String APIname = Current_cell.replace("(API_NAME)","");
@@ -44,9 +44,21 @@ public class APImanager {
 
                 JSONObject requestJSONObject = new JSONObject();
                 JSONObject responseJSONObject = new JSONObject();
+                while (this.iterator < this.EOF)
+                {
+                    this.iterator ++;
+                    try {
+                        Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
+                    }
+                    catch (NullPointerException p)
+                    {
+                        Current_cell = "";
+                    }
+                    if (Current_cell.equals("I/o")) break;
 
+                }
 
-                recursion(null , requestJSONObject, responseJSONObject, this.iterator+5);
+                recursion(null , requestJSONObject, responseJSONObject, this.iterator);
 
                 APIvalue.put("request",requestJSONObject);
                 APIvalue.put("response",responseJSONObject);
