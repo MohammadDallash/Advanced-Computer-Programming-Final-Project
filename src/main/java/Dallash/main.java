@@ -8,11 +8,17 @@ import java.io.IOException;
 
 public class main {
 
-
-
-    static int i = -1;
     static XSSFWorkbook wb = null;
-    static JSONObject mainJSONObject = new JSONObject();
+    static JSONObject requestJSONObject = new JSONObject();
+    static JSONObject responseJSONObject= new JSONObject();
+    static JSONObject APIJSONObject = new JSONObject();
+
+
+
+
+
+
+
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -24,41 +30,59 @@ public class main {
             return;
         }
 
+        recursion(null, -1);
 
-
-
-        recursion( mainJSONObject);
-        System.out.print(mainJSONObject);
-
+        APIJSONObject.put("request",requestJSONObject);
+        APIJSONObject.put("response",responseJSONObject);
+        System.out.println(APIJSONObject);
     }
 
 
-    public static void recursion(JSONObject JSONobject)
+    public static void recursion(JSONObject JSONobject, int i)
     {
         i++;
         if (i==21)  return;
 
-        String Cureent_cell = ExcelRead.read_Cell(i, 0, 0, wb).getStringCellValue();
-        String type = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
-        String [] array =Cureent_cell.split("/");
-        String  last_value = array[array.length - 1];
+        String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb).getStringCellValue();
+        String type = ExcelRead.read_Cell(i, 2, 0, wb).getStringCellValue();
+        String[] array =Cureent_cell.split("/");
+        String last_value = array[array.length - 1];
 
         if (type.equals("string"))
         {
             if(array.length > 2) JSONobject.put(last_value, "string");
-            if (array.length == 2) mainJSONObject.put(last_value, "string");
-            recursion(JSONobject);
+            if (array.length == 2)
+            {
+                if(isRequest(i)) requestJSONObject.put(last_value, "string");
+                else responseJSONObject.put(last_value, "string");
+            }
+            recursion(JSONobject,i);
         }
         else
         {
             JSONObject inner = new JSONObject();
-            recursion(inner);
+            recursion(inner,i);
             if(array.length > 2) JSONobject.put(type, inner);
-            if (array.length == 2)mainJSONObject.put(type, inner);
+            if (array.length == 2)
+            {
+                if(isRequest(i)) requestJSONObject.put(type, inner);
+                else responseJSONObject.put(type, inner);
+            }
         }
 
 
     }
+
+
+
+    public static boolean isRequest(int x)
+    {
+        String Cureent_cell = ExcelRead.read_Cell(x, 0, 0, wb).getStringCellValue();
+        if (Cureent_cell.equals("I")) return true;
+        if (Cureent_cell.equals("O")) return false;
+        else return false;
+    }
+
 
 
 
