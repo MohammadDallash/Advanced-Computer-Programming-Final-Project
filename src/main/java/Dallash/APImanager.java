@@ -5,8 +5,6 @@ import org.json.simple.JSONObject;
 
 import java.io.IOException;
 
-
-
 public class APImanager {
 
     private XSSFWorkbook wb = null;
@@ -51,27 +49,19 @@ public class APImanager {
                     Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
                     if (Current_cell.equals("I/o")) break;
                 }
-
                 recursion(null , requestJSONObject, responseJSONObject, this.iterator);
                 APIvalue.put("request",requestJSONObject);
                 APIvalue.put("response",responseJSONObject);
                 this.APIs.put(APIname, APIvalue);
-
-
             }
         }
 
         return this.APIs;
-
     }
-
-
 
     public  void recursion(JSONObject JSONobject,JSONObject requestObject,JSONObject responseObject,int i )
     {
         i++;
-
-
         String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb);
         if (i>=this.EOF || Cureent_cell.equals(""))
         {
@@ -103,13 +93,7 @@ public class APImanager {
                 else responseObject.put(last_value, inner);
             }
         }
-
-
     }
-
-
-
-
 
 
     public  boolean isRequest(int x)
