@@ -19,9 +19,8 @@ public class APImanager {
         try
         {
             wb = ExcelRead.get_Workbook(S);
-            //this.EOF = wb.getSheetAt(0).getLastRowNum();
-            this.EOF = 57;
-            System.out.println(this.EOF);
+            this.EOF = wb.getSheetAt(0).getLastRowNum();
+                        System.out.println(this.EOF);
         } catch (IOException e)
         {
             System.out.println("err reading the file\n");
