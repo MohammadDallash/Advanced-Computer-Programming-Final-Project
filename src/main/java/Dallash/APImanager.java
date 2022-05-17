@@ -10,20 +10,23 @@ import java.io.IOException;
 public class APImanager {
 
     private XSSFWorkbook wb = null;
-    private final int EOF;
+    private  int EOF;
     private JSONObject APIs = new JSONObject();
     private int iterator;
 
-    public APImanager(String S, int eof)
+    public APImanager(String S)
     {
-        this.EOF = eof;
         try
         {
             wb = ExcelRead.get_Workbook(S);
+            //this.EOF = wb.getSheetAt(0).getLastRowNum();
+            this.EOF = 57;
+            System.out.println(this.EOF);
         } catch (IOException e)
         {
             System.out.println("err reading the file\n");
         }
+
     }
 
 
@@ -34,7 +37,7 @@ public class APImanager {
         for (this.iterator = 0; iterator < this.EOF; this.iterator++)
         {
             Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
-            if (Current_cell.endsWith(("API_NAME")));
+            if (Current_cell.endsWith("(API_NAME)"))
             {
                 String APIname = Current_cell.replace("(API_NAME)","");
                 JSONObject APIvalue = new JSONObject();
@@ -47,25 +50,15 @@ public class APImanager {
                 while (this.iterator < this.EOF)
                 {
                     this.iterator ++;
-                    try {
-                        Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
-                    }
-                    catch (NullPointerException p)
-                    {
-                        Current_cell = "";
-                    }
+                    Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
                     if (Current_cell.equals("I/o")) break;
-
                 }
 
                 recursion(null , requestJSONObject, responseJSONObject, this.iterator);
-
                 APIvalue.put("request",requestJSONObject);
                 APIvalue.put("response",responseJSONObject);
-
-
                 this.APIs.put(APIname, APIvalue);
-                return this.APIs;
+
 
             }
         }
@@ -79,13 +72,14 @@ public class APImanager {
     public  void recursion(JSONObject JSONobject,JSONObject requestObject,JSONObject responseObject,int i )
     {
         i++;
-        if (i>=this.EOF)
+
+
+        String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb);
+        if (i>=this.EOF || Cureent_cell.equals(""))
         {
             this.iterator = i;
             return;
         }
-
-        String Cureent_cell = ExcelRead.read_Cell(i, 1, 0, wb);
         String type = ExcelRead.read_Cell(i, 2, 0, wb);
         String[] array =Cureent_cell.split("/");
         String last_value = array[array.length - 1];
