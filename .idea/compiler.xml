@@ -9,5 +9,8 @@
         <module name="Advanced-Computer-Programming-Final-Project" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Advanced-Computer-Programming-Final-Project" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
