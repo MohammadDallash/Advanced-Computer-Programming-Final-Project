@@ -4,12 +4,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class APImanager {
 
     private XSSFWorkbook wb = null;
     private  int EOF;
-    private JSONObject APIs = new JSONObject();
+
+    private JSONObject APIs = new JSONObject();//todo
+    private ArrayList<Operation> Service = new ArrayList<Operation>();
+
     private int iterator;
 
     public APImanager(String S)
@@ -37,6 +41,7 @@ public class APImanager {
             {
                 String APIname = Current_cell.replace("(API_NAME)","");
                 JSONObject APIvalue = new JSONObject();
+                Operation operation = new Operation(APIname, ExcelRead.read_Cell(iterator+2, 0, 0, wb), ExcelRead.read_Cell(iterator+2, 1, 0, wb));
 
                 APIvalue.put(ExcelRead.read_Cell(iterator+1, 0, 0, wb), ExcelRead.read_Cell(iterator+2, 0, 0, wb));
                 APIvalue.put(ExcelRead.read_Cell(iterator+1, 1, 0, wb), ExcelRead.read_Cell(iterator+2, 1, 0, wb));
@@ -52,7 +57,9 @@ public class APImanager {
                 recursion(null , requestJSONObject, responseJSONObject, this.iterator);
                 APIvalue.put("request",requestJSONObject);
                 APIvalue.put("response",responseJSONObject);
-                this.APIs.put(APIname, APIvalue);
+
+                this.APIs.put(APIname, APIvalue);//todo
+                this.Service.add(operation);
             }
         }
 
