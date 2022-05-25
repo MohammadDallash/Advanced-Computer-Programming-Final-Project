@@ -2,34 +2,41 @@ package com.GUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 public class Hello_World extends Application{
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // TODO Auto-generated method stub
-        Button btn1=new Button("Say, Hello World");
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
-                // TODO Auto-generated method stub
-                System.out.println("hello world");
-            }
-        });
-        StackPane root=new StackPane();
-        root.getChildren().add(btn1);
-        Scene scene=new Scene(root,600,400);
-        primaryStage.setTitle("First JavaFX Application");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void main (String[] args)
+        public static void main (String[] args)
     {
-        launch(args);
+        Application.launch(args);
     }
 
+    @Override
+    public void start(Stage stage) throws Exception
+    {
+        Group root = new Group();
+        Scene myScene = new Scene(root);
+        stage.setScene(myScene);
+
+
+        stage.setWidth(420);
+        stage.setHeight(420);
+        stage.setTitle("my Http program!");
+        stage.setResizable(false);
+
+
+
+
+
+        Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
+        stage.getIcons().add(icon);
+
+        stage.show();
+    }
 }
