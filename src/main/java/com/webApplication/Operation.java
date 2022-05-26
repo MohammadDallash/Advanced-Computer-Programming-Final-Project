@@ -3,14 +3,18 @@ package com.webApplication;
 
 import com.GUI.myApp;
 import com.utility.GUI_utility;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -67,37 +71,55 @@ public class Operation {
 
 
 
-        Font myfont = Font.font("Consolas", 0.0365*myApp.length*myApp.scale);
-        double skip_line  = 0.067 * myApp.length*myApp.scale;
 
-        Text mainText = new Text("HTTP Operation : " + this.REST_URL +  "\nREST URL : " + this.REST_URL + ((this.request == null)? "":"\nrequest") +((this.response == null)? "":"\nresponse"));
-        mainText.setLayoutY((0.525 - myApp.scale*0.25) * myApp.length);mainText.setLayoutX(myApp.length* (0.55-0.5*myApp.scale));
-        mainText.setFont(myfont);
-        mainText.setFill(Color.BLACK);
-        mainText.setLineSpacing(0.025*myApp.length*myApp.scale);
-        root.getChildren().add(mainText);
 
-        Text req_info = new Text("[No of objects: " + String.valueOf(this.request.get_Nobj()) +" No of fields: " + String.valueOf(this.request.get_Nfield()) + "]");
+
+        /*Text req_info = new Text("[No of objects: " + String.valueOf(this.request.get_Nobj()) +" No of fields: " + String.valueOf(this.request.get_Nfield()) + "]");
 
         req_info.setLayoutY((0.525 - myApp.scale*0.25) * myApp.length+ 3 *skip_line);req_info.setLayoutX(myApp.length* ((1-myApp.scale+0.1)*0.5));
         req_info.setWrappingWidth(565);
         req_info.setTextAlignment(TextAlignment.RIGHT);
         req_info.setFont(myfont);
-        req_info.setFill(Color.BLACK);
+        req_info.setFill(Color.RED);
         root.getChildren().add(req_info);
 
 
         Text res_info = new Text("No of objects: " + String.valueOf(this.response.get_Nobj()) +"No of fields: " + String.valueOf(this.response.get_Nfield()) );
         res_info.setFont(myfont);
-        res_info.setFill(Color.BLACK);
-        root.getChildren().add(res_info);
+        res_info.setFill(Color.RED);
+        root.getChildren().add(res_info);*/
+
+        GridPane LeftGrid = new GridPane();
+        LeftGrid.setPadding(new Insets(240,0,0,120));
+        LeftGrid.setVgap(30);
+        LeftGrid.add(make_Text("HTTP Operation : " + this.HTTP_Operation ), 0, 0);
+        LeftGrid.add(make_Text("REST URL : " + this.REST_URL), 0, 1);
+        LeftGrid.add(make_Text((this.request == null)? "":"request" ), 0, 2);
+        LeftGrid.add(make_Text((this.response == null)? "":"response" ), 0, 3);
+        root.getChildren().add(LeftGrid);
+
+
+
+        GridPane RightGrid = new GridPane();
+        RightGrid.setPadding(new Insets(240,0,0,120));
+        RightGrid.setVgap(30);
+        RightGrid.add(make_Text_RIGHT(""), 0, 0);
+        RightGrid.add(make_Text_RIGHT(""), 0, 1);
+        RightGrid.add(make_Text_RIGHT("[No of objects: " + String.valueOf(this.request.get_Nobj()) +" No of fields: " + String.valueOf(this.request.get_Nfield())+"]"), 0, 2);
+        RightGrid.add(make_Text_RIGHT("[No of objects: " + String.valueOf(this.response.get_Nobj()) +" No of fields: " + String.valueOf(this.response.get_Nfield()) + "]"), 0, 3);
+
+        root.getChildren().add(RightGrid);
+
+
+
 
 
 /*
         Button btn=new Button();
-        //btn.setGraphic(mainText);
-        btn.setLayoutX(mainText.getLayoutX());btn.setLayoutY(mainText.getLayoutY());
-        //btn.setBackground(Background.EMPTY);
+        btn.setGraphic(getNodeByRowColumnIndex(0,0,LeftGrid));
+        btn.setLayoutX(getNodeByRowColumnIndex(0,0,LeftGrid).getLayoutX());
+        btn.setLayoutY(getNodeByRowColumnIndex(0,0,LeftGrid).getLayoutY());
+           //btn.setBackground(Background.EMPTY);
         btn.setOnAction(e-> System.out.println("hi"));
 
 
@@ -108,5 +130,38 @@ public class Operation {
     }
 
 
+    public Text make_Text(String s)
+    {
+        Text Text = new Text(s);
+        Text.setFont(Font.font("Consolas", 24));
+        Text.setFill(Color.BLACK);
+        Text.setTextAlignment(TextAlignment.LEFT);
+        return Text;
+    }
+
+
+    public Text make_Text_RIGHT(String s)
+    {
+        Text Text = new Text(s);
+        Text.setFont(Font.font("Consolas", 24));
+        Text.setFill(Color.RED);
+        Text.setWrappingWidth(580);
+        Text.setTextAlignment(TextAlignment.RIGHT);
+        return Text;
+    }
+
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
 
 }

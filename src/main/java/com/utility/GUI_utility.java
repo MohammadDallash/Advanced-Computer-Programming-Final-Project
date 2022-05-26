@@ -28,8 +28,8 @@ public final class GUI_utility {
 
 
         Line myLine = new Line();
-        myLine.setStartX(myApp.length* (1-scale)*0.5);myLine.setStartY(myApp.length* ((1-scale)*0.5 + scale*0.2));
-        myLine.setEndX(myApp.length*((1-scale)*0.5 + scale)); myLine.setEndY(myApp.length* ((1-scale)*0.5 + scale*0.2));
+        myLine.setStartX(myApp.length* (0.5-0.5*scale));myLine.setStartY(myApp.length* ((1-scale)*0.5 + scale*0.2));
+        myLine.setEndX(myApp.length*(0.5+0.5*scale)); myLine.setEndY(myApp.length* ((1-scale)*0.5 + scale*0.2));
         myLine.setStrokeWidth(5);
         myLine.setStroke(color);
         root.getChildren().add(myLine);
