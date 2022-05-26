@@ -27,4 +27,17 @@ public class Protocol {
         this.fields.add(field);
     }
 
+    public int get_Nfield()
+    {
+        return this.fields.size();
+    }
+
+
+    public int get_Nobj()
+    {
+        return this.objs.size();
+    }
+
+
+
 }

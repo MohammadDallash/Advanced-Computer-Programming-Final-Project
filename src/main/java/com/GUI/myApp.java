@@ -1,10 +1,10 @@
 package com.GUI;
+import com.utility.APImanager;
+import com.utility.GUI_utility;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -12,13 +12,21 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.scene.layout.StackPane;
-public class Hello_World extends Application{
-    private static final int length = 800;
+import org.apache.log4j.BasicConfigurator;
 
-        public static void main (String[] args)
+public class myApp extends Application{
+    public static final int length = 800;
+    public static final double scale = 0.8;
+    public static APImanager myManager;
+
+    public static void main (String[] args)
     {
+        BasicConfigurator.configure();
+        myManager =  new APImanager("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\Excels\\basic.xlsx");
+        System.out.println(myManager.get_api());
+
         Application.launch(args);
     }
 
@@ -28,7 +36,6 @@ public class Hello_World extends Application{
         Group root = new Group();
         Scene myScene = new Scene(root);
         stage.setScene(myScene);
-
 
         stage.setWidth(length);
         stage.setHeight(length);
@@ -45,26 +52,13 @@ public class Hello_World extends Application{
 
 
 
-        Rectangle myRectangle = new Rectangle();
-        myRectangle.setX(0.1*length);myRectangle.setY(0.1*length);
-        myRectangle.setWidth(0.8*length);myRectangle.setHeight(0.8*length);
-        myRectangle.setFill(Color.rgb(254,187,100));
-        myRectangle.setStrokeWidth(5);
-        myRectangle.setArcHeight(50);myRectangle.setArcWidth(50);
-        myRectangle.setStroke(Color.BLACK);
-        root.getChildren().add(myRectangle);
 
-
-        Line myLine = new Line();
-        myLine.setStartX(0.1*length);myLine.setStartY(0.25*length);
-        myLine.setEndX(0.9*length); myLine.setEndY(0.25*length);
-        myLine.setStrokeWidth(5);
-        myLine.setStroke(Color.BLACK);
-        root.getChildren().add(myLine);
+        root.getChildren().add(GUI_utility.UML(Color.BLACK, scale,"hello"));
 
         Text myText = new Text("Name :" );
-        myText.setX(0.15*length);myText.setY(0.2*length);
-        myText.setFont(Font.font("Consolas", 0.0625*length));
+        myText.setTextOrigin(VPos.CENTER);
+        myText.setY(((1-scale)*0.5 + scale*0.1) * length);myText.setX(myApp.length* ((1-scale+0.1)*0.5));
+        myText.setFont(Font.font("Consolas", 0.0625*length*scale*1.25));
         myText.setFill(Color.BLACK);
         root.getChildren().add(myText);
 
@@ -72,7 +66,7 @@ public class Hello_World extends Application{
 
         Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
         stage.getIcons().add(icon);
-
+        stage.setScene(myManager.get_api().get(0).draw());
         stage.show();
     }
 }
