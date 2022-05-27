@@ -14,11 +14,13 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
+import static com.GUI.myApp.css;
 import static com.GUI.myApp.stage;
 
 public class Protocol {
     private ArrayList<Obj> objs = new ArrayList<Obj>();
     private ArrayList<Field> fields = new ArrayList<Field>();
+    private final int font_size = 23;
 
     public Protocol()
     {
@@ -59,16 +61,16 @@ public class Protocol {
         root.getChildren().add(background_img);
         root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, type));
 
-        GridPane LeftGrid = GUI_utility.Setupgrid(true, 25, this.objs.size() + this.fields.size());
-        GridPane RightGrid = GUI_utility.Setupgrid(false, 25, this.objs.size() + this.fields.size());
+        GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, this.objs.size() + this.fields.size());
+        GridPane RightGrid = GUI_utility.Setupgrid(false, font_size, this.objs.size() + this.fields.size());
 
         Field field;Button btn;
         for (int i = 0; i < this.objs.size(); i++)
         {
             Obj obj = this.objs.get(i);
-            LeftGrid.add(GUI_utility.make_Text_left(obj.getName(), 25), 0, i);
-            RightGrid.add(GUI_utility.make_Text_right(obj.get_Nobj(), obj.get_Nfield(),25) , 0,i);
-            btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid);
+            LeftGrid.add(GUI_utility.make_Text_left(obj.getName(), font_size), 0, i);
+            RightGrid.add(GUI_utility.make_Text_right(obj.get_Nobj(), obj.get_Nfield(),font_size) , 0,i);
+            btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
 
             btn.setOnAction(e -> stage.setScene(obj.draw()));
             root.getChildren().add(btn);
@@ -77,10 +79,14 @@ public class Protocol {
         for (int i = 0; i < this.fields.size(); i++)
         {
             field = this.fields.get(i);
-            LeftGrid.add(GUI_utility.make_Text_left(field.getName(), 25), 0, i+this.objs.size());
+            LeftGrid.add(GUI_utility.make_Text_left(field.getName(), font_size), 0, i+this.objs.size());
         }
 
         root.getChildren().addAll(LeftGrid, RightGrid);
+
+
+
+
         return myScene;
     }
 

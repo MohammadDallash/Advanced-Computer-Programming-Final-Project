@@ -30,6 +30,7 @@ import org.apache.poi.ss.formula.functions.T;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.GUI.myApp.css;
 import static com.GUI.myApp.stage;
 
 public class Operation {
@@ -38,6 +39,7 @@ public class Operation {
     public String REST_URL;
     public Protocol request = new Protocol();
     public Protocol response = new Protocol();
+    private final int font_size = 23;
 
 
     public Operation(String API_NAME, String HTTP_Operation, String REST_URL) {
@@ -72,31 +74,32 @@ public class Operation {
         root.getChildren().add(background_img);
         root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, "API NAME : " + this.API_NAME));
 
-        GridPane LeftGrid = GUI_utility.Setupgrid(true, 25, 4);
+        GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, 4);
 
-        LeftGrid.add(GUI_utility.make_Text_left(("HTTP Operation : " + this.HTTP_Operation), 25), 0, 0);
+        LeftGrid.add(GUI_utility.make_Text_left(("HTTP Operation : " + this.HTTP_Operation), 20), 0, 0);
 
-        LeftGrid.add(GUI_utility.make_Text_left(("REST URL : " + this.REST_URL), 25), 0, 1);
-        LeftGrid.add(GUI_utility.make_Text_left("request", 25), 0, 2);
-        LeftGrid.add(GUI_utility.make_Text_left("response", 25), 0, 3);
+        LeftGrid.add(GUI_utility.make_Text_left(("REST URL : " + this.REST_URL), 20), 0, 1);
+        LeftGrid.add(GUI_utility.make_Text_left("request", font_size), 0, 2);
+        LeftGrid.add(GUI_utility.make_Text_left("response", font_size), 0, 3);
         root.getChildren().add(LeftGrid);
 
 
-        GridPane RightGrid = GUI_utility.Setupgrid(false ,25, 4);
-        RightGrid.add(GUI_utility.make_Text_right(this.request.get_Nobj(),this.request.get_Nfield(),25), 0, 2);
-        RightGrid.add(GUI_utility.make_Text_right(response.get_Nobj(),this.response.get_Nfield(),25), 0, 3);
+        GridPane RightGrid = GUI_utility.Setupgrid(false ,font_size, 4);
+        RightGrid.add(GUI_utility.make_Text_right(this.request.get_Nobj(),this.request.get_Nfield(),font_size), 0, 2);
+        RightGrid.add(GUI_utility.make_Text_right(response.get_Nobj(),this.response.get_Nfield(),font_size), 0, 3);
         root.getChildren().add(RightGrid);
 
 
 
 
-        Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid);
+        Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
         btnnReq.setOnAction(e -> stage.setScene(this.request.draw("Request")));
 
-        Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid);
+        Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid,myScene);
         btnnRes.setOnAction(e -> stage.setScene(this.response.draw("Response")));
 
         root.getChildren().addAll(btnnReq, btnnRes);
+
 
 
 

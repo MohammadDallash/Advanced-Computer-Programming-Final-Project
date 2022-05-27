@@ -4,8 +4,10 @@ import com.GUI.myApp;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -53,7 +55,7 @@ public final class GUI_utility {
 
     }
 
-    public static Button setUp_button_onGrid(final int row, final int column, GridPane gridPane)
+    public static Button setUp_button_onGrid(final int row, final int column, GridPane gridPane, Scene scene)
     {
         Button btnn = new Button();
         Node myNode = getNodeByRowColumnIndex(row, column, gridPane);
@@ -61,7 +63,19 @@ public final class GUI_utility {
         btnn.setLayoutX(gridPane.getLayoutX()-7);
         btnn.setLayoutY(gridPane.getLayoutY() + row * 50-4);
 
+        btnn.setStyle("-fx-border-color:red;-fx-background-color:null;");
+        btnn.setOnMouseEntered(e-> {
+            btnn.setStyle("-fx-border-color:red; -fx-background-color: red;");
+            scene.setCursor(Cursor.HAND);
+            ((Text)myNode).setFill(Color.rgb(254,187,100));
+        });
+        btnn.setOnMouseExited(e-> {
+            btnn.setStyle("-fx-text-fill: red;-fx-font-weight: bold;-fx-border-color:red;-fx-background-color:null;");
+            scene.setCursor(Cursor.DEFAULT);
+            ((Text)myNode).setFill(Color.RED);
+        });
         return btnn;
+
     }
 
     public static Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {

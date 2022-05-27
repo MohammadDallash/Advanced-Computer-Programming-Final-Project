@@ -16,11 +16,15 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 
+import java.util.Objects;
+
 public class myApp extends Application{
     public static final int length = 800;
     public static final double scale = 0.8;
     public static APImanager myManager;
     public  static Stage stage;
+    public  static String css  = "";
+
 
     public static void main (String[] args)
     {
@@ -36,6 +40,10 @@ public class myApp extends Application{
     {
         Group root = new Group();
         Scene myScene = new Scene(root);
+
+
+
+        //myScene.getStylesheets().add("stylesheet.css");
         stage = new Stage();
         stage.setScene(myScene);
 
@@ -49,8 +57,6 @@ public class myApp extends Application{
         Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
-
-
 
 
 
