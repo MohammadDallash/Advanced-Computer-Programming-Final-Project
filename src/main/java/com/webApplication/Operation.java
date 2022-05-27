@@ -108,24 +108,9 @@ public class Operation {
         root.getChildren().add(RightGrid);
 
 
-        Button btn = new Button();
-        Node myNode = getNodeByRowColumnIndex(3, 0, RightGrid);
-        btn.setGraphic(myNode);
-        btn.setLayoutX(myNode.getLayoutX());
-        btn.setLayoutY(myNode.getLayoutY());
-        //btn.setBackground(Background.EMPTY);
-        btn.setOnAction(e -> System.out.println("hi"));
-
-        root.getChildren().add(btn);
 
 
-
-        Button btnn = new Button();
-        myNode = getNodeByRowColumnIndex(2, 0, RightGrid);
-        btnn.setGraphic(myNode);
-        btnn.setLayoutX(myNode.getLayoutX());
-        btnn.setLayoutY(myNode.getLayoutY());
-        //btn.setBackground(Background.EMPTY);
+        Button btnn = GUI_utility.set_button_onGrid(0,0,LeftGrid);
         btnn.setOnAction(e -> System.out.println("hi"));
 
         root.getChildren().add(btnn);
@@ -151,8 +136,6 @@ public class Operation {
         Text text = new Text(s);
         text.setFont(Font.font("Consolas", 24));
         text.setFill(Color.RED);
-        //text.setWrappingWidth(580);
-        //text.setTextAlignment(TextAlignment.RIGHT);
         text.setTextOrigin(VPos.TOP);
         return text;
     }
@@ -160,20 +143,6 @@ public class Operation {
 
 
 
-    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
 
-        for (Node node : childrens) {
-            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-                node.setLayoutY(gridPane.getLayoutY() + row * 50-4);
-                node.setLayoutX(gridPane.getLayoutX()-7);
-                result = node;
-                break;
-            }
-        }
-
-        return result;
-    }
 
 }

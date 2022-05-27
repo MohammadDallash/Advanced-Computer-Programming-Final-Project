@@ -1,8 +1,12 @@
 package com.utility;
 
 import com.GUI.myApp;
+import javafx.collections.ObservableList;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -44,6 +48,33 @@ public final class GUI_utility {
         return root;
 
     }
+
+    public static Button set_button_onGrid(final int row, final int column, GridPane gridPane)
+    {
+        Button btnn = new Button();
+        Node myNode = getNodeByRowColumnIndex(row, column, gridPane);
+        btnn.setGraphic(myNode);
+        btnn.setLayoutX(gridPane.getLayoutX()-7);
+        btnn.setLayoutY(gridPane.getLayoutY() + row * 50-4);
+
+        return btnn;
+    }
+
+    public static Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
+
 
 
 }
