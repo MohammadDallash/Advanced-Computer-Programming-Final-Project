@@ -2,16 +2,20 @@ package com.utility;
 
 import com.GUI.myApp;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public final class GUI_utility {
     private GUI_utility() {}
@@ -49,7 +53,7 @@ public final class GUI_utility {
 
     }
 
-    public static Button set_button_onGrid(final int row, final int column, GridPane gridPane)
+    public static Button setUp_button_onGrid(final int row, final int column, GridPane gridPane)
     {
         Button btnn = new Button();
         Node myNode = getNodeByRowColumnIndex(row, column, gridPane);
@@ -74,6 +78,50 @@ public final class GUI_utility {
 
         return result;
     }
+
+    public static GridPane Setupgrid(boolean left , int fontSize, int NofRows)
+    {
+        GridPane grid = new GridPane();
+        grid.setLayoutX(120 + ((left)? 0:120) );
+        grid.setLayoutY(230);
+
+
+        for (int i = 0; i < NofRows; i++) {
+            RowConstraints rowConstraint = new RowConstraints(50);
+            rowConstraint.setValignment(VPos.TOP);
+            ColumnConstraints ColumnConstraints = new ColumnConstraints();
+            ColumnConstraints.setHalignment(HPos.RIGHT);
+            if (left) ColumnConstraints.setHalignment(HPos.LEFT);
+            grid.getColumnConstraints().add(ColumnConstraints);
+            grid.getRowConstraints().add(rowConstraint);
+        }
+        return grid;
+    }
+
+
+    public static Text make_Text_left(String s, int fontSize)
+    {
+        Text text = new Text(s);
+        text.setFont(Font.font("Consolas", fontSize));
+        text.setFill(Color.BLACK);
+        text.setTextAlignment(TextAlignment.LEFT);
+        text.setTextOrigin(VPos.TOP);
+
+        return text;
+    }
+
+    public static Text make_Text_right(int NofObjects,int NofFields, int fontSize)
+    {
+        Text text = new Text("[No of objects: " + String.valueOf(NofObjects) + " No of fields: " + String.valueOf(NofFields) + "]");
+        text.setFont(Font.font("Consolas", fontSize));
+        text.setFill(Color.RED);
+        text.setTextAlignment(TextAlignment.LEFT);
+        text.setTextOrigin(VPos.TOP);
+
+        return text;
+    }
+
+
 
 
 

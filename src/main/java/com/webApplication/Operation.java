@@ -30,6 +30,8 @@ import org.apache.poi.ss.formula.functions.T;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.GUI.myApp.stage;
+
 public class Operation {
     public String API_NAME;
     public String HTTP_Operation;
@@ -70,50 +72,31 @@ public class Operation {
         root.getChildren().add(background_img);
         root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, "API NAME : " + this.API_NAME));
 
-        GridPane LeftGrid = new GridPane();
-        for (int i = 0; i < 4; i++) {
-            RowConstraints rowConstraint = new RowConstraints(50);
-            rowConstraint.setValignment(VPos.TOP);
-            LeftGrid.getRowConstraints().add(rowConstraint);
-        }
-        GridPane.setValignment(LeftGrid ,VPos.TOP);
-        GridPane.setHalignment(LeftGrid, HPos.LEFT);
+        GridPane LeftGrid = GUI_utility.Setupgrid(true, 25, 4);
 
-        LeftGrid.setLayoutX(120);
-        LeftGrid.setLayoutY(230);
-        LeftGrid.add(make_Text("HTTP Operation : " + this.HTTP_Operation), 0, 0);
-        LeftGrid.add(make_Text("REST URL : " + this.REST_URL), 0, 1);
-        LeftGrid.add(make_Text((this.request == null) ? "" : "Request"), 0, 2);
-        LeftGrid.add(make_Text((this.response == null) ? "" : "response"), 0, 3);
+        LeftGrid.add(GUI_utility.make_Text_left(("HTTP Operation : " + this.HTTP_Operation), 25), 0, 0);
+
+        LeftGrid.add(GUI_utility.make_Text_left(("REST URL : " + this.REST_URL), 25), 0, 1);
+        LeftGrid.add(GUI_utility.make_Text_left("request", 25), 0, 2);
+        LeftGrid.add(GUI_utility.make_Text_left("response", 25), 0, 3);
         root.getChildren().add(LeftGrid);
 
 
-        GridPane RightGrid = new GridPane();
-        for (int i = 0; i < 4; i++) {
-            RowConstraints rowConstraint = new RowConstraints(50);
-            rowConstraint.setValignment(VPos.TOP);
-            ColumnConstraints ColumnConstraints = new ColumnConstraints();
-            ColumnConstraints.setHalignment(HPos.RIGHT);
-            RightGrid.getColumnConstraints().add(ColumnConstraints);
-            RightGrid.getRowConstraints().add(rowConstraint);
-        }
-        GridPane.setValignment(RightGrid ,VPos.TOP);
-        GridPane.setHalignment(RightGrid, HPos.LEFT);
-
-        RightGrid.setLayoutX(250);
-        RightGrid.setLayoutY(230);
-        RightGrid.add(make_Text_RIGHT("[No of objects: " + String.valueOf(this.request.get_Nobj()) + " No of fields: " + String.valueOf(this.request.get_Nfield()) + "]"), 0, 2);
-        RightGrid.add(make_Text_RIGHT("[No of objects: " + String.valueOf(this.response.get_Nobj()) + " No of fields: " + String.valueOf(this.response.get_Nfield()) + "]"), 0, 3);
-        //RightGrid.setGridLinesVisible(true);
+        GridPane RightGrid = GUI_utility.Setupgrid(false ,25, 4);
+        RightGrid.add(GUI_utility.make_Text_right(this.request.get_Nobj(),this.request.get_Nfield(),25), 0, 2);
+        RightGrid.add(GUI_utility.make_Text_right(response.get_Nobj(),this.response.get_Nfield(),25), 0, 3);
         root.getChildren().add(RightGrid);
 
 
 
 
-        Button btnn = GUI_utility.set_button_onGrid(0,0,LeftGrid);
-        btnn.setOnAction(e -> System.out.println("hi"));
+        Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid);
+        btnnReq.setOnAction(e -> stage.setScene(this.request.draw("Request")));
 
-        root.getChildren().add(btnn);
+        Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid);
+        btnnRes.setOnAction(e -> stage.setScene(this.response.draw("Response")));
+
+        root.getChildren().addAll(btnnReq, btnnRes);
 
 
 
@@ -121,24 +104,6 @@ public class Operation {
     }
 
 
-    public Text make_Text(String s) {
-        Text text = new Text(s);
-        text.setFont(Font.font("Consolas", 24));
-        text.setFill(Color.BLACK);
-        text.setTextAlignment(TextAlignment.LEFT);
-        text.setTextOrigin(VPos.TOP);
-
-        return text;
-    }
-
-
-    public Text make_Text_RIGHT(String s) {
-        Text text = new Text(s);
-        text.setFont(Font.font("Consolas", 24));
-        text.setFill(Color.RED);
-        text.setTextOrigin(VPos.TOP);
-        return text;
-    }
 
 
 

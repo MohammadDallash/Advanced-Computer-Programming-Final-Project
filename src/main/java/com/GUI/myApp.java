@@ -20,6 +20,7 @@ public class myApp extends Application{
     public static final int length = 800;
     public static final double scale = 0.8;
     public static APImanager myManager;
+    public  static Stage stage;
 
     public static void main (String[] args)
     {
@@ -31,10 +32,11 @@ public class myApp extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception
+    public void start(Stage s) throws Exception
     {
         Group root = new Group();
         Scene myScene = new Scene(root);
+        stage = new Stage();
         stage.setScene(myScene);
 
         stage.setWidth(length);
