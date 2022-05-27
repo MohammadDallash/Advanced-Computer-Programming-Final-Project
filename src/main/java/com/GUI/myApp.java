@@ -16,6 +16,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class myApp extends Application{
@@ -23,7 +24,7 @@ public class myApp extends Application{
     public static final double scale = 0.8;
     public static APImanager myManager;
     public  static Stage stage;
-    public  static String css  = "";
+    public  static  ArrayList <Scene> scence = new ArrayList<Scene>();
 
 
     public static void main (String[] args)
@@ -74,7 +75,14 @@ public class myApp extends Application{
 
         Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
         stage.getIcons().add(icon);
-        stage.setScene(myManager.get_api().get(0).draw());
+
+
+        myApp.scence.add(myManager.get_api().get(0).draw());
+        stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+
+
+
+
         stage.show();
     }
 }

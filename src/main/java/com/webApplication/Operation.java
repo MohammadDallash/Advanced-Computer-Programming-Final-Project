@@ -5,6 +5,7 @@ import com.GUI.myApp;
 import com.utility.GUI_utility;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -30,7 +31,6 @@ import org.apache.poi.ss.formula.functions.T;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.GUI.myApp.css;
 import static com.GUI.myApp.stage;
 
 public class Operation {
@@ -93,10 +93,23 @@ public class Operation {
 
 
         Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
-        btnnReq.setOnAction(e -> stage.setScene(this.request.draw("Request")));
+        btnnReq.setOnAction(e -> {
+            myApp.scence.add(this.request.draw("request"));
+            stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+        });
 
+        Protocol res = this.response;
         Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid,myScene);
-        btnnRes.setOnAction(e -> stage.setScene(this.response.draw("Response")));
+        btnnRes.setOnAction(
+        new EventHandler<ActionEvent>()
+        {
+            public void handle(ActionEvent e)
+            {
+                myApp.scence.add(res.draw("request"));
+                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+            }
+        }
+        );
 
         root.getChildren().addAll(btnnReq, btnnRes);
         //LeftGrid.setGridLinesVisible(true);RightGrid.setGridLinesVisible(true);

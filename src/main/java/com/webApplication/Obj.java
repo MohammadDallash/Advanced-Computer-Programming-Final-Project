@@ -2,6 +2,8 @@ package com.webApplication;
 
 import com.GUI.myApp;
 import com.utility.GUI_utility;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -81,7 +83,10 @@ public class Obj {
             RightGrid.add(GUI_utility.make_Text_right(obj.get_Nobj(), obj.get_Nfield(),font_size) , 0,i);
             btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
 
-            btn.setOnAction(e -> stage.setScene(obj.draw()));
+            btn.setOnAction(e -> {
+                    myApp.scence.add(obj.draw());
+                    stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+            });
             root.getChildren().add(btn);
         }
 
@@ -90,10 +95,29 @@ public class Obj {
             field = this.fields.get(i);
             LeftGrid.add(GUI_utility.make_Text_left(field.getName(), font_size), 0, i+this.objs.size());
             RightGrid.add(GUI_utility.make_Text_right("Click for more info",font_size) , 0,i+this.objs.size());
-            root.getChildren().add(GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene));
+            btn =GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene);
+            Field finalField = field;
+            btn.setOnAction(e -> {
+                myApp.scence.add(finalField.draw());
+                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+            });
+            root.getChildren().add(btn);
         }
 
-        root.getChildren().addAll(LeftGrid, RightGrid);
+
+
+        Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
+        back_Button.setOnAction(
+                new EventHandler<ActionEvent>()
+                {
+                    public void handle(ActionEvent e)
+                    {
+                        Scene temp = myApp.scence.remove(myApp.scence.size() - 1);
+                        stage.setScene(temp);
+                    }
+                }
+        );
+        root.getChildren().addAll(LeftGrid, RightGrid, back_Button);
         return myScene;
     }
 }

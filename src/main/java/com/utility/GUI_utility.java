@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 public final class GUI_utility {
     public static final int margin = 40;
     public static final int UML_start_X = 80; public static int UML_start_Y = 80;
+    public static final int btn_X = 560; public static final int btn_Y = 650;
     private static final int UML_Width = 640;
     private GUI_utility() {}
 
@@ -67,14 +68,14 @@ public final class GUI_utility {
         btnn.setLayoutX(gridPane.getLayoutX()-7 - width);
         btnn.setLayoutY(gridPane.getLayoutY() + (row * font_size*2)-4);
 
-        btnn.setStyle("-fx-border-color:red;-fx-background-color:null;");
+        btnn.setStyle("transition-duration: 0.4s;-fx-border-color:red;-fx-background-color:null;");
         btnn.setOnMouseEntered(e-> {
-            btnn.setStyle("-fx-border-color:red; -fx-background-color: red;");
+            btnn.setStyle("transition-duration: 0.4s;-fx-border-color:red; -fx-background-color: red;");
             scene.setCursor(Cursor.HAND);
             ((Text)myNode).setFill(Color.rgb(254,187,100));
         });
         btnn.setOnMouseExited(e-> {
-            btnn.setStyle("-fx-text-fill: red;-fx-font-weight: bold;-fx-border-color:red;-fx-background-color:null;");
+            btnn.setStyle("-fx-text-fill: red;-fx-border-color:red;-fx-background-color:null;");
             scene.setCursor(Cursor.DEFAULT);
             ((Text)myNode).setFill(Color.RED);
         });
@@ -82,6 +83,28 @@ public final class GUI_utility {
 
     }
 
+    public  static Button back_button(int x, int y, int fontSize, Scene scene)
+    {
+        Button btnn = new Button("previous");
+        btnn.setFont(Font.font("Consolas", fontSize));
+        btnn.setLayoutX(x);
+        btnn.setLayoutY(y);
+
+        btnn.setStyle("-fx-text-fill: rgb(26,117,2);-fx-border-color:rgb(26,117,2);-fx-background-color:null;");
+        btnn.setOnMouseEntered(e-> {
+            btnn.setStyle("-fx-border-color:rgb(26,117,2); -fx-background-color: rgb(26,117,2);");
+            scene.setCursor(Cursor.HAND);
+            btnn.setTextFill(Color.rgb(254,187,100));
+        });
+        btnn.setOnMouseExited(e-> {
+            btnn.setStyle("-fx-text-fill: rgb(26,117,2);-fx-border-color:rgb(26,117,2);-fx-background-color:null;");
+            scene.setCursor(Cursor.DEFAULT);
+            //btnn.setTextFill(Color.GRAY);
+        });
+
+
+        return btnn;
+    }
 
     public static Button setUp_Info_button_onGrid(final int row, final int column, GridPane gridPane, Scene scene)
     {
@@ -100,7 +123,7 @@ public final class GUI_utility {
             ((Text)myNode).setFill(Color.rgb(254,187,100));
         });
         btnn.setOnMouseExited(e-> {
-            btnn.setStyle("-fx-text-fill: red;-fx-font-weight: bold;-fx-border-color:red;-fx-background-color:null;");
+            btnn.setStyle("-fx-text-fill: red;-fx-border-color:red;-fx-background-color:null;");
             scene.setCursor(Cursor.DEFAULT);
             ((Text)myNode).setFill(Color.RED);
         });
