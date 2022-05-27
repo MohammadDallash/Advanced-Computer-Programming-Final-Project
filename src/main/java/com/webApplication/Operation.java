@@ -76,9 +76,9 @@ public class Operation {
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, 4);
 
-        LeftGrid.add(GUI_utility.make_Text_left(("HTTP Operation : " + this.HTTP_Operation), 20), 0, 0);
+        LeftGrid.add(GUI_utility.make_Text_left(("HTTP Operation : " + this.HTTP_Operation), font_size), 0, 0);
 
-        LeftGrid.add(GUI_utility.make_Text_left(("REST URL : " + this.REST_URL), 20), 0, 1);
+        LeftGrid.add(GUI_utility.make_Text_left(("REST URL : " + this.REST_URL), font_size), 0, 1);
         LeftGrid.add(GUI_utility.make_Text_left("request", font_size), 0, 2);
         LeftGrid.add(GUI_utility.make_Text_left("response", font_size), 0, 3);
         root.getChildren().add(LeftGrid);
@@ -99,7 +99,7 @@ public class Operation {
         btnnRes.setOnAction(e -> stage.setScene(this.response.draw("Response")));
 
         root.getChildren().addAll(btnnReq, btnnRes);
-
+        //LeftGrid.setGridLinesVisible(true);RightGrid.setGridLinesVisible(true);
 
 
 

@@ -64,6 +64,7 @@ public class Protocol {
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, this.objs.size() + this.fields.size());
         GridPane RightGrid = GUI_utility.Setupgrid(false, font_size, this.objs.size() + this.fields.size());
 
+
         Field field;Button btn;
         for (int i = 0; i < this.objs.size(); i++)
         {
@@ -81,7 +82,7 @@ public class Protocol {
             field = this.fields.get(i);
             LeftGrid.add(GUI_utility.make_Text_left(field.getName(), font_size), 0, i+this.objs.size());
         }
-
+        //LeftGrid.setGridLinesVisible(true);RightGrid.setGridLinesVisible(true);
         root.getChildren().addAll(LeftGrid, RightGrid);
 
 

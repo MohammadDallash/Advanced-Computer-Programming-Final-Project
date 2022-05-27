@@ -17,9 +17,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public final class GUI_utility {
+    public static final int margin = 40;
+    public static final int UML_start_X = 80; public static int UML_start_Y = 80;
+    private static final int UML_Width = 640;
     private GUI_utility() {}
 
 
@@ -28,7 +30,7 @@ public final class GUI_utility {
         Group root = new Group();
 
         Rectangle myRectangle = new Rectangle();
-        myRectangle.setX(myApp.length*(1-scale)*0.5);myRectangle.setY(myApp.length*(1-scale)*0.5);
+        myRectangle.setX(UML_start_X);myRectangle.setY(80);
         myRectangle.setWidth(myApp.length*scale);myRectangle.setHeight(myApp.length*scale);
         myRectangle.setFill(Color.rgb(254,187,100));
         myRectangle.setStrokeWidth(5);
@@ -38,16 +40,16 @@ public final class GUI_utility {
 
 
         Line myLine = new Line();
-        myLine.setStartX(myApp.length* (0.5-0.5*scale));myLine.setStartY(myApp.length* ((1-scale)*0.5 + scale*0.2));
-        myLine.setEndX(myApp.length*(0.5+0.5*scale)); myLine.setEndY(myApp.length* ((1-scale)*0.5 + scale*0.2));
+        myLine.setStartX(UML_start_X);myLine.setStartY(208);
+        myLine.setEndX(myApp.length-UML_start_X); myLine.setEndY(208);
         myLine.setStrokeWidth(5);
         myLine.setStroke(color);
         root.getChildren().add(myLine);
 
         Text Header = new Text(string);
         Header.setTextOrigin(VPos.CENTER);
-        Header.setY(((1-myApp.scale)*0.5 + myApp.scale*0.1) * myApp.length);Header.setX(myApp.length* ((1-myApp.scale+0.1)*0.5));
-        Header.setFont(Font.font("Consolas", 0.0625*myApp.length*myApp.scale*1.25*0.6));
+        Header.setY(144);Header.setX(120);
+        Header.setFont(Font.font("Consolas", 30));
         Header.setFill(Color.BLACK);
         root.getChildren().add(Header);
 
@@ -60,8 +62,10 @@ public final class GUI_utility {
         Button btnn = new Button();
         Node myNode = getNodeByRowColumnIndex(row, column, gridPane);
         btnn.setGraphic(myNode);
-        btnn.setLayoutX(gridPane.getLayoutX()-7);
-        btnn.setLayoutY(gridPane.getLayoutY() + row * 50-4);
+        double font_size = ((Text)myNode).getFont().getSize();
+        double width = myNode.getBoundsInParent().getWidth();
+        btnn.setLayoutX(gridPane.getLayoutX()-7 - width);
+        btnn.setLayoutY(gridPane.getLayoutY() + (row * font_size*2)-4);
 
         btnn.setStyle("-fx-border-color:red;-fx-background-color:null;");
         btnn.setOnMouseEntered(e-> {
@@ -77,6 +81,38 @@ public final class GUI_utility {
         return btnn;
 
     }
+
+
+    public static Button setUp_Info_button_onGrid(final int row, final int column, GridPane gridPane, Scene scene)
+    {
+        Button btnn = new Button();
+        Node myNode = getNodeByRowColumnIndex(row, column, gridPane);
+        double font_size = ((Text)myNode).getFont().getSize();
+        btnn.setGraphic(myNode);
+        double width = myNode.getBoundsInParent().getWidth();
+        btnn.setLayoutX(gridPane.getLayoutX()-7 - width );
+        btnn.setLayoutY(gridPane.getLayoutY() + (row * 2 *font_size)-4);
+
+        btnn.setStyle("-fx-border-color:red;-fx-background-color:null;");
+        btnn.setOnMouseEntered(e-> {
+            btnn.setStyle("-fx-border-color:red; -fx-background-color: red;");
+            scene.setCursor(Cursor.HAND);
+            ((Text)myNode).setFill(Color.rgb(254,187,100));
+        });
+        btnn.setOnMouseExited(e-> {
+            btnn.setStyle("-fx-text-fill: red;-fx-font-weight: bold;-fx-border-color:red;-fx-background-color:null;");
+            scene.setCursor(Cursor.DEFAULT);
+            ((Text)myNode).setFill(Color.RED);
+        });
+
+        return btnn;
+
+    }
+
+
+
+
+
 
     public static Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
         Node result = null;
@@ -96,12 +132,12 @@ public final class GUI_utility {
     public static GridPane Setupgrid(boolean left , int fontSize, int NofRows)
     {
         GridPane grid = new GridPane();
-        grid.setLayoutX(120 + ((left)? 0:120) );
-        grid.setLayoutY(230);
+        grid.setLayoutX(UML_start_X +margin + ((left)? 0:(UML_Width - 2*margin)) );
+        grid.setLayoutY(UML_start_Y + 150);
 
 
         for (int i = 0; i < NofRows; i++) {
-            RowConstraints rowConstraint = new RowConstraints(50);
+            RowConstraints rowConstraint = new RowConstraints(fontSize*2);
             rowConstraint.setValignment(VPos.TOP);
             ColumnConstraints ColumnConstraints = new ColumnConstraints();
             ColumnConstraints.setHalignment(HPos.RIGHT);
@@ -118,8 +154,6 @@ public final class GUI_utility {
         Text text = new Text(s);
         text.setFont(Font.font("Consolas", fontSize));
         text.setFill(Color.BLACK);
-        text.setTextAlignment(TextAlignment.LEFT);
-        text.setTextOrigin(VPos.TOP);
 
         return text;
     }
@@ -129,8 +163,18 @@ public final class GUI_utility {
         Text text = new Text("[No of objects: " + String.valueOf(NofObjects) + " No of fields: " + String.valueOf(NofFields) + "]");
         text.setFont(Font.font("Consolas", fontSize));
         text.setFill(Color.RED);
-        text.setTextAlignment(TextAlignment.LEFT);
-        text.setTextOrigin(VPos.TOP);
+
+
+
+        return text;
+    }
+
+
+    public static Text make_Text_right(String s, int fontSize)
+    {
+        Text text = new Text(s);
+        text.setFont(Font.font("Consolas", fontSize));
+        text.setFill(Color.RED);
 
         return text;
     }

@@ -88,7 +88,9 @@ public class Obj {
         for (int i = 0; i < this.fields.size(); i++)
         {
             field = this.fields.get(i);
-            LeftGrid.add(GUI_utility.make_Text_left(field.getName(), 25), 0, i+this.objs.size());
+            LeftGrid.add(GUI_utility.make_Text_left(field.getName(), font_size), 0, i+this.objs.size());
+            RightGrid.add(GUI_utility.make_Text_right("Click for more info",font_size) , 0,i+this.objs.size());
+            root.getChildren().add(GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene));
         }
 
         root.getChildren().addAll(LeftGrid, RightGrid);
