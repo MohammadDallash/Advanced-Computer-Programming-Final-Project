@@ -5,10 +5,12 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -49,7 +51,7 @@ public class myApp extends Application{
         Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
         stage.getIcons().add(icon);
 
-        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background0.png");
+        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
 
@@ -57,8 +59,20 @@ public class myApp extends Application{
         FileChooser file_chooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.xlsx");
         file_chooser.getExtensionFilters().add(extFilter);
-        Text text = GUI_utility.make_Text_right("Select the Excel from your PC !",40);
 
+        Text text = new Text("Select the Excel from your PC!");
+        text.setFont(Font.font("Consolas", 40));
+        text.setFill(Color.RED);
+
+
+
+        VBox smallVbox = new VBox();
+
+        smallVbox.getChildren().add(text);
+        smallVbox.setStyle("-fx-background-color:white;-fx-background-radius: 1px;");
+        smallVbox.setAlignment(Pos.CENTER);
+        smallVbox.setMinHeight(40+text.getBoundsInParent().getHeight());
+        smallVbox.setMaxWidth(40+text.getBoundsInParent().getWidth());
 
 
         Button btnn = new Button("Show open dialog");
@@ -66,22 +80,22 @@ public class myApp extends Application{
         btnn.setFont(Font.font("Consolas", 30));
 
 
-        btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,00);-fx-border-color:rgb(12,13,0);-fx-background-color:null;");
+        btnn.setStyle("-fx-border-width: 2;-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,00);-fx-border-color:rgb(12,13,0);-fx-background-color:white;");
         btnn.setOnMouseEntered(e-> {
-            btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-border-color:rgb(12,13,0); -fx-background-color: rgb(12,13,0);");
+            btnn.setStyle("-fx-border-width: 2;-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-border-color:rgb(12,13,0); -fx-background-color: rgb(12,13,0);");
             myScene.setCursor(Cursor.HAND);
             btnn.setTextFill(Color.WHITE);
         });
         btnn.setOnMouseExited(e-> {
-            btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,0);-fx-border-color:rgb(12,13,0);-fx-background-color:null;");
+            btnn.setStyle("-fx-border-width: 2;-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,0);-fx-border-color:rgb(12,13,0);-fx-background-color:white;");
             myScene.setCursor(Cursor.DEFAULT);
         });
 
 
-        VBox vbox = new VBox(150, text, btnn);
+        VBox vbox = new VBox(150, smallVbox, btnn);
         vbox.setAlignment(Pos.CENTER);
         vbox.setMinWidth(800);vbox.setMinHeight(800);
-        root.getChildren().add(vbox);
+        root.getChildren().addAll(vbox);
         vbox.setLayoutY(-50);
 
 
@@ -91,6 +105,8 @@ public class myApp extends Application{
 
             if (file != null) {
                 text.setText(file.getName()+ " selected");
+                smallVbox.setMinHeight(40+text.getBoundsInParent().getHeight());
+                smallVbox.setMaxWidth(40+text.getBoundsInParent().getWidth());
                 btnn.setVisible(false);
                 root.getChildren().add(ready(myScene, file.getAbsolutePath() ));
             }});
@@ -119,7 +135,7 @@ public class myApp extends Application{
         vbox.setMinWidth(800);vbox.setMinHeight(800);
 
 
-        GObtnn.setFont(Font.font("Consolas", 18));
+        GObtnn.setFont(Font.font("Consolas", 30));
 
 
         GObtnn.setStyle("-fx-background-radius: 22px; -fx-border-radius: 22px;-fx-text-fill: rgb(20,130,45);-fx-border-color:rgb(20,130,45);-fx-background-color:white;");
@@ -139,9 +155,11 @@ public class myApp extends Application{
                 stage.setScene(listObj.draw());
                 });
 
-        vbox.setLayoutY(140);
+        vbox.setLayoutY(56);
 
 
         return vbox;
     }
 }
+
+

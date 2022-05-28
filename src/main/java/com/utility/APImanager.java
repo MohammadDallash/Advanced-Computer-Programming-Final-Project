@@ -41,9 +41,9 @@ public class APImanager {
         for (this.iterator = 0; iterator < this.EOF; this.iterator++)
         {
             Current_cell = ExcelRead.read_Cell(this.iterator, 0, 0, wb);
-            if (Current_cell.endsWith("(API_NAME)"))
+            if (Current_cell.startsWith("REST Operation Mapping"))
             {
-                String APIname = Current_cell.replace("(API_NAME)","");
+                String APIname = Current_cell.replace("REST Operation Mapping (","").replace(")","");
                 Operation operation = new Operation(APIname, ExcelRead.read_Cell(iterator+2, 0, 0, wb), ExcelRead.read_Cell(iterator+2, 1, 0, wb));
 
 
