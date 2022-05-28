@@ -34,11 +34,11 @@ import java.util.List;
 import static com.GUI.myApp.stage;
 
 public class Operation {
-    public String API_NAME;
-    public String HTTP_Operation;
-    public String REST_URL;
-    public Protocol request = new Protocol();
-    public Protocol response = new Protocol();
+    private String API_NAME;
+    private String HTTP_Operation;
+    private String REST_URL;
+    private Protocol request = new Protocol();
+    private Protocol response = new Protocol();
     private final int font_size = 23;
 
 
@@ -63,6 +63,11 @@ public class Operation {
 
     public void add_response_Field(Field field) {
         this.response.addField(field);
+    }
+
+    public String get_name()
+    {
+        return this.API_NAME;
     }
 
     public Scene draw() {
@@ -111,8 +116,10 @@ public class Operation {
         }
         );
 
-        root.getChildren().addAll(btnnReq, btnnRes);
-        //LeftGrid.setGridLinesVisible(true);RightGrid.setGridLinesVisible(true);
+        Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
+        back_Button.setOnAction(e-> stage.setScene(myApp.scence.pop()));
+
+        root.getChildren().addAll(btnnReq, btnnRes, back_Button);
 
 
 

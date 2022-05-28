@@ -99,7 +99,6 @@ public final class GUI_utility {
         btnn.setOnMouseExited(e-> {
             btnn.setStyle("-fx-text-fill: rgb(26,117,2);-fx-border-color:rgb(26,117,2);-fx-background-color:null;");
             scene.setCursor(Cursor.DEFAULT);
-            //btnn.setTextFill(Color.GRAY);
         });
 
 
