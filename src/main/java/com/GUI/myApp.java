@@ -18,13 +18,14 @@ import org.apache.log4j.BasicConfigurator;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Stack;
 
 public class myApp extends Application{
     public static final int length = 800;
     public static final double scale = 0.8;
     public static APImanager myManager;
     public  static Stage stage;
-    public  static  ArrayList <Scene> scence = new ArrayList<Scene>();
+    public  static Stack<Scene> scence = new Stack<>();
 
 
     public static void main (String[] args)
@@ -77,8 +78,8 @@ public class myApp extends Application{
         stage.getIcons().add(icon);
 
 
-        myApp.scence.add(myManager.get_api().get(0).draw());
-        stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+        myApp.scence.push(myManager.get_api().get(0).draw());
+        stage.setScene(myApp.scence.peek());
 
 
 

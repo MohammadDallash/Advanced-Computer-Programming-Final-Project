@@ -84,8 +84,8 @@ public class Obj {
             btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
 
             btn.setOnAction(e -> {
-                    myApp.scence.add(obj.draw());
-                    stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+                    myApp.scence.push(myScene);
+                    stage.setScene(obj.draw());
             });
             root.getChildren().add(btn);
         }
@@ -98,8 +98,8 @@ public class Obj {
             btn =GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene);
             Field finalField = field;
             btn.setOnAction(e -> {
-                myApp.scence.add(finalField.draw());
-                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+                myApp.scence.push(myScene);
+                stage.setScene(finalField.draw());
             });
             root.getChildren().add(btn);
         }
@@ -112,8 +112,7 @@ public class Obj {
                 {
                     public void handle(ActionEvent e)
                     {
-                        Scene temp = myApp.scence.remove(myApp.scence.size() - 1);
-                        stage.setScene(temp);
+                        stage.setScene(myApp.scence.pop());
                     }
                 }
         );

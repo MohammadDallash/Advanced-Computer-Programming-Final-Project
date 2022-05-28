@@ -94,8 +94,8 @@ public class Operation {
 
         Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
         btnnReq.setOnAction(e -> {
-            myApp.scence.add(this.request.draw("request"));
-            stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+            myApp.scence.push(myScene);
+            stage.setScene(this.request.draw("request"));
         });
 
         Protocol res = this.response;
@@ -105,8 +105,8 @@ public class Operation {
         {
             public void handle(ActionEvent e)
             {
-                myApp.scence.add(res.draw("request"));
-                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+                myApp.scence.push(myScene);
+                stage.setScene(res.draw("response"));
             }
         }
         );

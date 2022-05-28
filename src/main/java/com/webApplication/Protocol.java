@@ -2,8 +2,6 @@ package com.webApplication;
 
 import com.GUI.myApp;
 import com.utility.GUI_utility;
-import com.webApplication.Field;
-import com.webApplication.Obj;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -18,8 +16,8 @@ import java.util.ArrayList;
 import static com.GUI.myApp.stage;
 
 public class Protocol {
-    private ArrayList<Obj> objs = new ArrayList<Obj>();
-    private ArrayList<Field> fields = new ArrayList<Field>();
+    private ArrayList<Obj> objs = new ArrayList<>();
+    private ArrayList<Field> fields = new ArrayList<>();
     private final int font_size = 23;
 
     public Protocol()
@@ -74,8 +72,8 @@ public class Protocol {
             btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
             Obj finalObj = obj;
             btn.setOnAction(e -> {
-                myApp.scence.add(finalObj.draw());
-                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
+                myApp.scence.push(myScene);
+                stage.setScene(finalObj.draw());
             });
             root.getChildren().add(btn);
         }
@@ -88,13 +86,11 @@ public class Protocol {
             btn =GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene);
             Field finalField = field;
             btn.setOnAction(e -> {
-                myApp.scence.add(finalField.draw());
-                stage.setScene(myApp.scence.get(myApp.scence.size() - 1));
-
+                myApp.scence.push(myScene);
+                stage.setScene(finalField.draw());
             });
             root.getChildren().add(btn);
         }
-        //LeftGrid.setGridLinesVisible(true);RightGrid.setGridLinesVisible(true);
 
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
@@ -103,8 +99,7 @@ public class Protocol {
                 {
                     public void handle(ActionEvent e)
                     {
-                        Scene temp = myApp.scence.remove(myApp.scence.size() - 1);
-                        stage.setScene(temp);
+                        stage.setScene(myApp.scence.pop());
                     }
                 }
         );

@@ -65,8 +65,7 @@ public class Field {
                 {
                     public void handle(ActionEvent e)
                     {
-                        Scene temp = myApp.scence.remove(myApp.scence.size() - 1);
-                        stage.setScene(temp);
+                        stage.setScene(myApp.scence.pop());
                     }
                 }
         );
