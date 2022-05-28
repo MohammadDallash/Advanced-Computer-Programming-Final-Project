@@ -60,15 +60,7 @@ public class Field {
 
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
-        back_Button.setOnAction(
-                new EventHandler<ActionEvent>()
-                {
-                    public void handle(ActionEvent e)
-                    {
-                        stage.setScene(myApp.scence.pop());
-                    }
-                }
-        );
+        back_Button.setOnAction(e-> stage.setScene(myApp.scence.pop()));
 
         root.getChildren().addAll(LeftGrid, back_Button);
         return myScene;
