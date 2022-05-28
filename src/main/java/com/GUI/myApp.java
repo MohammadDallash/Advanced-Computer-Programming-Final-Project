@@ -46,7 +46,7 @@ public class myApp extends Application{
         Group root = new Group();
         stage.setWidth(length);
         stage.setHeight(length);
-        stage.setTitle("my Http program!");
+        stage.setTitle("myHttp program!");
         stage.setResizable(false);
         Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
         stage.getIcons().add(icon);
