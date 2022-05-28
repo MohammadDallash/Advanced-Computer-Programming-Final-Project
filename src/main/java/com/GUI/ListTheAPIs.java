@@ -1,5 +1,6 @@
 package com.GUI;
 
+import com.utility.APImanager;
 import com.utility.GUI_utility;
 import com.webApplication.Operation;
 import javafx.scene.Group;
@@ -10,21 +11,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+
 import static com.GUI.myApp.myManager;
 import static com.GUI.myApp.stage;
 
 public class ListTheAPIs {
-    private static int font_size = 23;
-    private ListTheAPIs(){}
+    private  int font_size = 23;
+    private APImanager myManager;
+    private String file_path;
+
+    public ListTheAPIs(String file_path)
+    {
+        this.myManager = new APImanager(file_path);
+        this.file_path = file_path;
+    }
 
 
 
-    public static Scene draw ()
+    public  Scene draw ()
     {
 
         Group root = new Group();
         Scene myScene = new Scene(root);
-        int size = myManager.get_api().size();
+        int size = this.myManager.get_api().size();
 
         Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
         ImageView background_img = new ImageView(background);

@@ -1,28 +1,23 @@
 package com.GUI;
 import com.utility.APImanager;
 import com.utility.GUI_utility;
-import com.webApplication.Field;
-import com.webApplication.Operation;
 import javafx.application.Application;
-import javafx.geometry.VPos;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.poi.sl.draw.geom.GuideIf;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.io.File;
 import java.util.Stack;
 
 public class myApp extends Application{
@@ -37,7 +32,6 @@ public class myApp extends Application{
     public static void main (String[] args)
     {
         BasicConfigurator.configure();
-        myManager =  new APImanager("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\Excels\\basic.xlsx");
 
         Application.launch(args);
     }
@@ -47,7 +41,7 @@ public class myApp extends Application{
     {
         stage = new Stage();
 
-
+        Group root = new Group();
         stage.setWidth(length);
         stage.setHeight(length);
         stage.setTitle("my Http program!");
@@ -55,14 +49,99 @@ public class myApp extends Application{
         Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
         stage.getIcons().add(icon);
 
+        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background0.png");
+        ImageView background_img = new ImageView(background);
+        root.getChildren().add(background_img);
+
+        Scene myScene = new Scene(root);
+        FileChooser file_chooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.xlsx");
+        file_chooser.getExtensionFilters().add(extFilter);
+        Text text = GUI_utility.make_Text_right("Select the Excel from your PC !",40);
+
+
+
+        Button btnn = new Button("Show open dialog");
+
+        btnn.setFont(Font.font("Consolas", 30));
+
+
+        btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,00);-fx-border-color:rgb(12,13,0);-fx-background-color:null;");
+        btnn.setOnMouseEntered(e-> {
+            btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-border-color:rgb(12,13,0); -fx-background-color: rgb(12,13,0);");
+            myScene.setCursor(Cursor.HAND);
+            btnn.setTextFill(Color.WHITE);
+        });
+        btnn.setOnMouseExited(e-> {
+            btnn.setStyle("-fx-background-radius: 12px; -fx-border-radius: 12px;-fx-text-fill: rgb(12,13,0);-fx-border-color:rgb(12,13,0);-fx-background-color:null;");
+            myScene.setCursor(Cursor.DEFAULT);
+        });
+
+
+        VBox vbox = new VBox(150, text, btnn);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setMinWidth(800);vbox.setMinHeight(800);
+        root.getChildren().add(vbox);
+        vbox.setLayoutY(-50);
+
+
+
+        btnn.setOnAction(e->{
+            File file = file_chooser.showOpenDialog(stage);
+
+            if (file != null) {
+                text.setText(file.getName()+ " selected");
+                btnn.setVisible(false);
+                root.getChildren().add(ready(myScene, file.getAbsolutePath() ));
+            }});
 
 
 
 
 
-        stage.setScene(ListTheAPIs.draw());
+
+
+
+
+
+        stage.setScene(myScene);
+
 
 
         stage.show();
+    }
+
+    public VBox ready(Scene myScene, String file_path)
+    {
+        Button GObtnn = new Button("Go!");
+        VBox vbox = new VBox(0, GObtnn);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setMinWidth(800);vbox.setMinHeight(800);
+
+
+        GObtnn.setFont(Font.font("Consolas", 18));
+
+
+        GObtnn.setStyle("-fx-background-radius: 22px; -fx-border-radius: 22px;-fx-text-fill: rgb(20,130,45);-fx-border-color:rgb(20,130,45);-fx-background-color:white;");
+        GObtnn.setOnMouseEntered(e-> {
+            GObtnn.setStyle("-fx-background-radius: 22px; -fx-border-radius: 22px;-fx-border-color:rgb(20,130,45); -fx-background-color: rgb(20,130,45);");
+            myScene.setCursor(Cursor.HAND);
+            GObtnn.setTextFill(Color.WHITE);
+        });
+        GObtnn.setOnMouseExited(e-> {
+            GObtnn.setStyle("-fx-background-radius: 22px; -fx-border-radius: 22px;-fx-text-fill: rgb(20,130,45);-fx-border-color:rgb(20,130,45);-fx-background-color:white;");
+            myScene.setCursor(Cursor.DEFAULT);
+        });
+
+
+            GObtnn.setOnAction(e->{
+                ListTheAPIs listObj = new ListTheAPIs(file_path);
+                stage.setScene(listObj.draw());
+                });
+
+        vbox.setLayoutY(140);
+
+
+        return vbox;
     }
 }

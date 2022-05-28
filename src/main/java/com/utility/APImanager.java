@@ -6,6 +6,7 @@ import com.webApplication.Operation;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,11 +20,11 @@ public class APImanager {
 
     private int iterator;
 
-    public APImanager(String S)
+    public APImanager(String file_path)
     {
         try
         {
-            wb = ExcelRead.get_Workbook(S);
+            wb = ExcelRead.get_Workbook(file_path);
             this.EOF = wb.getSheetAt(0).getLastRowNum();
         } catch (IOException e)
         {
