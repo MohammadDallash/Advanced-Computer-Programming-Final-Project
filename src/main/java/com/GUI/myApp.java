@@ -58,7 +58,7 @@ public class myApp extends Application{
         file_chooser.getExtensionFilters().add(extFilter);
 
         Text text = new Text("Select the Excel from your PC!");
-        text.setFont(Font.font("Consolas", 40));
+        text.setFont(Font.font("Consolas", 35));
         text.setFill(Color.RED);
 
 
@@ -97,16 +97,19 @@ public class myApp extends Application{
 
 
 
-        btnn.setOnAction(e->{
+        btnn.setOnAction(e->
+        {
             File file = file_chooser.showOpenDialog(stage);
 
-            if (file != null) {
+            if (file != null)
+            {
                 text.setText(file.getName()+ " selected");
                 smallVbox.setMinHeight(40+text.getBoundsInParent().getHeight());
                 smallVbox.setMaxWidth(40+text.getBoundsInParent().getWidth());
                 btnn.setVisible(false);
                 root.getChildren().add(ready(myScene, file.getAbsolutePath() ));
-            }});
+            }
+        });
 
 
 
@@ -132,7 +135,7 @@ public class myApp extends Application{
         vbox.setMinWidth(800);vbox.setMinHeight(800);
 
 
-        GObtnn.setFont(Font.font("Consolas", 30));
+        GObtnn.setFont(Font.font("Consolas", 25));
 
 
         GObtnn.setStyle("-fx-background-radius: 22px; -fx-border-radius: 22px;-fx-text-fill: rgb(20,130,45);-fx-border-color:rgb(20,130,45);-fx-background-color:white;");
