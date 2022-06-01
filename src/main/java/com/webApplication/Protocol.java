@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import static com.GUI.Default_State.stage;
 
 public class Protocol {
-    private ArrayList<Obj> objs = new ArrayList<>();
-    private ArrayList<Field> fields = new ArrayList<>();
+    private final ArrayList<Obj> objs = new ArrayList<>();
+    private final ArrayList<Field> fields = new ArrayList<>();
     private final int font_size = 23;
 
     public Protocol()
@@ -49,12 +49,9 @@ public class Protocol {
 
     public Scene draw(String type)
     {
-        Group root = new Group();
+        Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
-
-        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
-        ImageView background_img = new ImageView(background);
-        root.getChildren().add(background_img);
+        
         root.getChildren().add(GUI_utility.UML(Color.BLACK, type));
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, this.objs.size() + this.fields.size());

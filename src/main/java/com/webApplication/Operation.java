@@ -3,8 +3,6 @@ package com.webApplication;
 
 import com.GUI.Default_State;
 import com.utility.GUI_utility;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,12 +51,9 @@ public class Operation {
     }
 
     public Scene draw() {
-        Group root = new Group();
+        Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
 
-        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
-        ImageView background_img = new ImageView(background);
-        root.getChildren().add(background_img);
         root.getChildren().add(GUI_utility.UML(Color.BLACK, "API NAME : " + this.API_NAME));
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, 4);
@@ -88,14 +83,10 @@ public class Operation {
         Protocol res = this.response;
         Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid,myScene);
         btnnRes.setOnAction(
-        new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent e)
-            {
-                Default_State.scenes.push(myScene);
-                stage.setScene(res.draw("response"));
-            }
-        }
+                e -> {
+                    Default_State.scenes.push(myScene);
+                    stage.setScene(res.draw("response"));
+                }
         );
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
