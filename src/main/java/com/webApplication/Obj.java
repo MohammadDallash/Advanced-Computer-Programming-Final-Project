@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.GUI.Default_State.stage;
@@ -53,8 +54,7 @@ public class Obj {
         return this.name;
     }
 
-    public Scene draw()
-    {
+    public Scene draw() throws IOException {
         Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
 
@@ -73,7 +73,11 @@ public class Obj {
 
             btn.setOnAction(e -> {
                     Default_State.scenes.push(myScene);
+                try {
                     stage.setScene(obj.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+                }
             });
             root.getChildren().add(btn);
         }
@@ -87,7 +91,11 @@ public class Obj {
             Field finalField = field;
             btn.setOnAction(e -> {
                 Default_State.scenes.push(myScene);
-                stage.setScene(finalField.draw());
+                try {
+                    stage.setScene(finalField.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+                }
             });
             root.getChildren().add(btn);
         }

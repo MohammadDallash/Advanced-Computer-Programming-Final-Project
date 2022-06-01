@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
+
 import static com.GUI.Default_State.stage;
 
 public class ListTheAPIs_State {
@@ -22,8 +25,7 @@ public class ListTheAPIs_State {
 
 
 
-    public  Scene draw ()
-    {
+    public  Scene draw () throws IOException {
         Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
 
@@ -43,7 +45,12 @@ public class ListTheAPIs_State {
 
             button.setOnAction(e -> {
                 Default_State.scenes.push(myScene);
-                stage.setScene(myOp.draw());
+                try {
+                    stage.setScene(myOp.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+                }
             });
             root.getChildren().add(button);
         }

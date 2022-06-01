@@ -5,11 +5,10 @@ import com.utility.GUI_utility;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import static com.GUI.Default_State.stage;
 
@@ -47,8 +46,7 @@ public class Protocol {
         return this.objs.size();
     }
 
-    public Scene draw(String type)
-    {
+    public Scene draw(String type) throws IOException {
         Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
         
@@ -65,10 +63,13 @@ public class Protocol {
             LeftGrid.add(GUI_utility.make_Text_left(obj.getName(), font_size), 0, i);
             RightGrid.add(GUI_utility.make_Text_right(obj.get_Nobj(), obj.get_Nfield(),font_size) , 0,i);
             btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
-            Obj finalObj = obj;
             btn.setOnAction(e -> {
                 Default_State.scenes.push(myScene);
-                stage.setScene(finalObj.draw());
+                try {
+                    stage.setScene(obj.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+                }
             });
             root.getChildren().add(btn);
         }
@@ -82,7 +83,11 @@ public class Protocol {
             Field finalField = field;
             btn.setOnAction(e -> {
                 Default_State.scenes.push(myScene);
-                stage.setScene(finalField.draw());
+                try {
+                    stage.setScene(finalField.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+                }
             });
             root.getChildren().add(btn);
         }

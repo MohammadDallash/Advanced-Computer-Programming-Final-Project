@@ -6,10 +6,10 @@ import com.utility.GUI_utility;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+
+import java.io.IOException;
 
 import static com.GUI.Default_State.stage;
 
@@ -50,7 +50,7 @@ public class Operation {
         return this.API_NAME;
     }
 
-    public Scene draw() {
+    public Scene draw() throws IOException {
         Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
 
@@ -74,25 +74,35 @@ public class Operation {
 
 
 
-        Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
-        btnnReq.setOnAction(e -> {
+        Button button_request = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
+        button_request.setOnAction(e -> {
             Default_State.scenes.push(myScene);
-            stage.setScene(this.request.draw("request"));
+            try {
+                stage.setScene(this.request.draw("request"));
+            } catch (IOException ex) {
+                System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+            }
         });
 
         Protocol res = this.response;
-        Button btnnRes = GUI_utility.setUp_button_onGrid(3,0,RightGrid,myScene);
-        btnnRes.setOnAction(
+        Button button_response = GUI_utility.setUp_button_onGrid(3,0,RightGrid,myScene);
+        button_response.setOnAction(
                 e -> {
                     Default_State.scenes.push(myScene);
-                    stage.setScene(res.draw("response"));
+                    try {
+                        stage.setScene(res.draw("response"));
+                    } catch (IOException ex) {
+                        System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+                    }
                 }
         );
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
         back_Button.setOnAction(e-> stage.setScene(Default_State.scenes.pop()));
 
-        root.getChildren().addAll(btnnReq, btnnRes, back_Button);
+        root.getChildren().addAll(button_request, button_response, back_Button);
 
 
 

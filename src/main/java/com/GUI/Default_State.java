@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 import java.io.File;
+import java.io.IOException;
 import java.util.Stack;
 
 public class Default_State extends Application{
@@ -127,8 +128,13 @@ public class Default_State extends Application{
 
             Go_button.setOnAction(e->{
                 ListTheAPIs_State listObj = new ListTheAPIs_State(file_path);
-                stage.setScene(listObj.draw());
-                });
+                try {
+                    stage.setScene(listObj.draw());
+                } catch (IOException ex) {
+                    System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+
+                }
+            });
 
         vbox.setLayoutY(56);
 

@@ -20,6 +20,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
+
 public final class GUI_utility {
     private static final int window_width = 800;
     private static final int window_height = 800;
@@ -207,24 +210,28 @@ public final class GUI_utility {
         return text;
     }
 
-    public static Group setUp_main_Node()
-    {
+    public static Group setUp_main_Node() throws IOException {
         Group root = new Group();
-        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
+        Image background = new Image(Objects.requireNonNull(GUI_utility.class.getClassLoader().getResourceAsStream("background.png")));
+        //FileInputStream BG_file = new FileInputStream("src/main/resources/background.png");
+        //Image background = new Image(BG_file);
+        //BG_file.close();
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
         return  root;
     }
 
-    public static Stage setUp_Stage()
-    {
+    public static Stage setUp_Stage() throws IOException {
         Stage stage = new Stage();
 
         stage.setWidth(800);
         stage.setHeight(800);
         stage.setTitle("myHttp program!");
         stage.setResizable(false);
-        Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
+
+        Image icon = new Image(Objects.requireNonNull(GUI_utility.class.getClassLoader().getResourceAsStream("icon.png")));
+
+
         stage.getIcons().add(icon);
 
         return  stage;
