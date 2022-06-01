@@ -1,9 +1,7 @@
 package com.webApplication;
 
-import com.GUI.myApp;
+import com.GUI.Default_State;
 import com.utility.GUI_utility;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import static com.GUI.myApp.stage;
+import static com.GUI.Default_State.stage;
 
 public class Protocol {
     private ArrayList<Obj> objs = new ArrayList<>();
@@ -57,7 +55,7 @@ public class Protocol {
         Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
-        root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, type));
+        root.getChildren().add(GUI_utility.UML(Color.BLACK, type));
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, this.objs.size() + this.fields.size());
         GridPane RightGrid = GUI_utility.Setupgrid(false, font_size, this.objs.size() + this.fields.size());
@@ -72,7 +70,7 @@ public class Protocol {
             btn = GUI_utility.setUp_button_onGrid(i,0,RightGrid,myScene);
             Obj finalObj = obj;
             btn.setOnAction(e -> {
-                myApp.scence.push(myScene);
+                Default_State.scenes.push(myScene);
                 stage.setScene(finalObj.draw());
             });
             root.getChildren().add(btn);
@@ -86,7 +84,7 @@ public class Protocol {
             btn =GUI_utility.setUp_Info_button_onGrid(i + this.objs.size(), 0, RightGrid, myScene);
             Field finalField = field;
             btn.setOnAction(e -> {
-                myApp.scence.push(myScene);
+                Default_State.scenes.push(myScene);
                 stage.setScene(finalField.draw());
             });
             root.getChildren().add(btn);
@@ -94,7 +92,7 @@ public class Protocol {
 
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
-        back_Button.setOnAction(e-> stage.setScene(myApp.scence.pop()));
+        back_Button.setOnAction(e-> stage.setScene(Default_State.scenes.pop()));
         root.getChildren().addAll(LeftGrid, RightGrid, back_Button);
 
 

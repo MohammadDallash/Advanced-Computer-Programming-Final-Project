@@ -1,6 +1,5 @@
 package com.utility;
 
-import com.GUI.myApp;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -9,6 +8,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -17,22 +18,27 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public final class GUI_utility {
+    private static final int window_width = 800;
+    private static final int window_height = 800;
     public static final int margin = 40;
     public static final int UML_start_X = 80; public static int UML_start_Y = 80;
     public static final int btn_X = 560; public static final int btn_Y = 650;
     private static final int UML_Width = 640;
+    private static final int UML_Height = UML_Width;
+    private static final int Line_Y = 208;
     private GUI_utility() {}
 
 
-    public static Group UML (Color color, double scale, String string)
+    public static Group UML (Color color, String string)
     {
         Group root = new Group();
 
         Rectangle myRectangle = new Rectangle();
-        myRectangle.setX(UML_start_X);myRectangle.setY(80);
-        myRectangle.setWidth(myApp.length*scale);myRectangle.setHeight(myApp.length*scale);
+        myRectangle.setX(UML_start_X);myRectangle.setY(UML_start_Y);
+        myRectangle.setWidth(UML_Width);myRectangle.setHeight(UML_Height);
         myRectangle.setFill(Color.rgb(254,187,100));
         myRectangle.setStrokeWidth(5);
         myRectangle.setArcHeight(50);myRectangle.setArcWidth(50);
@@ -41,8 +47,8 @@ public final class GUI_utility {
 
 
         Line myLine = new Line();
-        myLine.setStartX(UML_start_X);myLine.setStartY(208);
-        myLine.setEndX(myApp.length-UML_start_X); myLine.setEndY(208);
+        myLine.setStartX(UML_start_X);myLine.setStartY(Line_Y);
+        myLine.setEndX(UML_start_X+UML_Width); myLine.setEndY(Line_Y);
         myLine.setStrokeWidth(5);
         myLine.setStroke(color);
         root.getChildren().add(myLine);
@@ -201,6 +207,28 @@ public final class GUI_utility {
         return text;
     }
 
+    public static Group setUp_main_Node()
+    {
+        Group root = new Group();
+        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
+        ImageView background_img = new ImageView(background);
+        root.getChildren().add(background_img);
+        return  root;
+    }
+
+    public static Stage setUp_Stage()
+    {
+        Stage stage = new Stage();
+
+        stage.setWidth(800);
+        stage.setHeight(800);
+        stage.setTitle("myHttp program!");
+        stage.setResizable(false);
+        Image icon = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\icon.png");
+        stage.getIcons().add(icon);
+
+        return  stage;
+    }
 
 
 

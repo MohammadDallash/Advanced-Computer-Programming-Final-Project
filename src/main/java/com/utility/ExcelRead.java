@@ -14,7 +14,9 @@ public final class ExcelRead {
     static public XSSFWorkbook get_Workbook(String string) throws IOException
     {
         FileInputStream myFile = new FileInputStream(string);
-        return  new XSSFWorkbook(myFile);
+        XSSFWorkbook myworkbook = new XSSFWorkbook(myFile);
+        myFile.close();
+        return  myworkbook ;
     }
 
     static public String read_Cell(int Row, int Cell, int sheet, XSSFWorkbook workbook)

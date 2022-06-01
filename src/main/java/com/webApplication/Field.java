@@ -1,19 +1,15 @@
 package com.webApplication;
 
 
-import com.GUI.myApp;
+import com.GUI.Default_State;
 import com.utility.GUI_utility;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
-import static com.GUI.myApp.stage;
+import static com.GUI.Default_State.stage;
 
 public class Field {
     private final String Allowed_Values;
@@ -28,15 +24,6 @@ public class Field {
         this.mandatory = mandatory;
     }
 
-    public String getAllowed_Values()
-    {
-        return this.Allowed_Values;
-    }
-    public String getMandatory()
-    {
-        return this.mandatory;
-    }
-
     public String getName() {
         return this.name;
     }
@@ -44,13 +31,11 @@ public class Field {
 
     public Scene draw()
     {
-        Group root = new Group();
+        Group root = GUI_utility.setUp_main_Node();
         Scene myScene = new Scene(root);
 
-        Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
-        ImageView background_img = new ImageView(background);
-        root.getChildren().add(background_img);
-        root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, "Name : " + this.name));
+
+        root.getChildren().add(GUI_utility.UML(Color.BLACK,  "Name : " + this.name));
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, 2);
 
@@ -60,7 +45,7 @@ public class Field {
 
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
-        back_Button.setOnAction(e-> stage.setScene(myApp.scence.pop()));
+        back_Button.setOnAction(e-> stage.setScene(Default_State.scenes.pop()));
 
         root.getChildren().addAll(LeftGrid, back_Button);
         return myScene;

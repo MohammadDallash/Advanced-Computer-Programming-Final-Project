@@ -1,44 +1,26 @@
 package com.webApplication;
 
 
-import com.GUI.myApp;
+import com.GUI.Default_State;
 import com.utility.GUI_utility;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
-import org.apache.poi.ss.formula.functions.T;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.GUI.myApp.stage;
+import static com.GUI.Default_State.stage;
 
 public class Operation {
-    private String API_NAME;
-    private String HTTP_Operation;
-    private String REST_URL;
-    private Protocol request = new Protocol();
-    private Protocol response = new Protocol();
+    private final String API_NAME;
+    private final String HTTP_Operation;
+    private final String REST_URL;
+    private final Protocol request = new Protocol();
+    private final Protocol response = new Protocol();
     private final int font_size = 23;
 
 
@@ -77,7 +59,7 @@ public class Operation {
         Image background = new Image("C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Project\\src\\background.png");
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
-        root.getChildren().add(GUI_utility.UML(Color.BLACK, myApp.scale, "API NAME : " + this.API_NAME));
+        root.getChildren().add(GUI_utility.UML(Color.BLACK, "API NAME : " + this.API_NAME));
 
         GridPane LeftGrid = GUI_utility.Setupgrid(true, font_size, 4);
 
@@ -99,7 +81,7 @@ public class Operation {
 
         Button btnnReq = GUI_utility.setUp_button_onGrid(2,0,RightGrid,myScene);
         btnnReq.setOnAction(e -> {
-            myApp.scence.push(myScene);
+            Default_State.scenes.push(myScene);
             stage.setScene(this.request.draw("request"));
         });
 
@@ -110,14 +92,14 @@ public class Operation {
         {
             public void handle(ActionEvent e)
             {
-                myApp.scence.push(myScene);
+                Default_State.scenes.push(myScene);
                 stage.setScene(res.draw("response"));
             }
         }
         );
 
         Button back_Button = GUI_utility.back_button(GUI_utility.btn_X,GUI_utility.btn_Y,font_size,myScene);
-        back_Button.setOnAction(e-> stage.setScene(myApp.scence.pop()));
+        back_Button.setOnAction(e-> stage.setScene(Default_State.scenes.pop()));
 
         root.getChildren().addAll(btnnReq, btnnRes, back_Button);
 
