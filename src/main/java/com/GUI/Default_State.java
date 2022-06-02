@@ -130,7 +130,7 @@ public class Default_State extends Application{
                 ListTheAPIs_State listObj = new ListTheAPIs_State(file_path);
                 try {
                     stage.setScene(listObj.draw());
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     System.out.println("ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 
                 }
