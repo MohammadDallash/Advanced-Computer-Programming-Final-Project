@@ -213,9 +213,6 @@ public final class GUI_utility {
     public static Group setUp_main_Node() throws IOException {
         Group root = new Group();
         Image background = new Image(Objects.requireNonNull(GUI_utility.class.getClassLoader().getResourceAsStream("background.png")));
-        //FileInputStream BG_file = new FileInputStream("src/main/resources/background.png");
-        //Image background = new Image(BG_file);
-        //BG_file.close();
         ImageView background_img = new ImageView(background);
         root.getChildren().add(background_img);
         return  root;

@@ -43,22 +43,4 @@ public final class ExcelRead {
     }
 
 
-   /* static public String Cell_toString(XSSFCell cell)
-    {
-        switch (cell.getCellType()) {
-            case STRING:
-                System.out.print(cell.getStringCellValue());
-                break;
-            case BOOLEAN:
-                System.out.print(cell.getBooleanCellValue());
-                break;
-            case NUMERIC:
-                System.out.print(cell.getNumericCellValue());
-                break;
-        }*/
-
-
-
-    //clearAllCachedResultValues() "C:\\Users\\Mohammad Dallash\\Documents\\GitHub\\Advanced-Computer-Programming-Final-Projest\\Excels"
-
 }
