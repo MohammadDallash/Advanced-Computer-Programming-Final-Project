@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 public final class GUI_utility {
-    private static final int window_width = 800;
-    private static final int window_height = 800;
+    public static final int window_width = 800;
+    public static final int window_height = 800;
     public static final int margin = 40;
     public static final int UML_start_X = 80; public static int UML_start_Y = 80;
     public static final int btn_X = 560; public static final int btn_Y = 650;

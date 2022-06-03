@@ -51,8 +51,8 @@ public class Default_State extends Application{
         smallVbox.getChildren().add(massage_to_the_user);
         smallVbox.setStyle("-fx-background-color:white;-fx-background-radius: 1px;");
         smallVbox.setAlignment(Pos.CENTER);
-        smallVbox.setMinHeight(40+massage_to_the_user.getBoundsInParent().getHeight());
-        smallVbox.setMaxWidth(40+massage_to_the_user.getBoundsInParent().getWidth());
+        smallVbox.setMinHeight(GUI_utility.margin+massage_to_the_user.getBoundsInParent().getHeight());
+        smallVbox.setMaxWidth(GUI_utility.margin+massage_to_the_user.getBoundsInParent().getWidth());
 
 
         Button Show_dialog_button = new Button("Show open dialog");
@@ -73,7 +73,7 @@ public class Default_State extends Application{
 
         VBox vbox = new VBox(150, smallVbox, Show_dialog_button);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setMinWidth(800);vbox.setMinHeight(800);
+        vbox.setMinWidth(GUI_utility.window_width);vbox.setMinHeight(GUI_utility.window_height);
         root.getChildren().addAll(vbox);
         vbox.setLayoutY(-50);
 
@@ -108,7 +108,7 @@ public class Default_State extends Application{
         Button Go_button = new Button("Go!");
         VBox vbox = new VBox(0, Go_button);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setMinWidth(800);vbox.setMinHeight(800);
+        vbox.setMinWidth(GUI_utility.window_width);vbox.setMinHeight(GUI_utility.window_height);
 
 
         Go_button.setFont(Font.font("Consolas", 25));
