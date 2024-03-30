@@ -13,7 +13,11 @@
 
 ## Screenshots
 
-(screenshots)
+<img width="551" alt="image" src="https://github.com/MohammadDallash/myhttp/assets/105324962/c35d0b9a-8f63-4df1-96a7-e25057d78eb4">
+<img width="549" alt="image" src="https://github.com/MohammadDallash/myhttp/assets/105324962/33889cb4-a21f-4996-91d5-008b12743356">
+<img width="550" alt="image" src="https://github.com/MohammadDallash/myhttp/assets/105324962/eaf8b767-b901-49c2-b282-b47a00b3a696">
+
+
 
 ## Usage
 
